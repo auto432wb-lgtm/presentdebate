@@ -1,23 +1,1637 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>US State Capitalism - AFF</title></head>
-<body style="font-family:Arial;background:#0b1220;color:#eaf2ff;padding:20px">
-<h1>US State-Sponsored Capitalism (Affirmative)</h1>
-<h2>Intro Round</h2>
-<p>The U.S. is capitalist, and that capitalism is materially state-sponsored through policy, subsidies, procurement, and monetary intervention.</p>
-<h2>Premise Round</h2>
-<ul>
-<li><b>Policy architecture:</b> Tax code, subsidies, and regulation shape winners/losers.</li>
-<li><b>Monetary backstop:</b> Crisis interventions stabilize major capital sectors.</li>
-<li><b>Federal contracting:</b> Defense/public spending drives core industries.</li>
-</ul>
-<h2>Rebuttal Round</h2>
-<ul>
-<li>“That’s just governance” → At U.S. scale and selectivity, it functions as sponsorship.</li>
-<li>“Free markets can’t be sponsored” → Mixed systems can be both market and state-shaped.</li>
-</ul>
-<h2>Rapid Fire</h2>
-<ul>
-<li>Do bailouts/subsidies materially alter market outcomes or not?</li>
-<li>Would key sectors look the same without federal contracts?</li>
-<li>Are you debating theory or actual U.S. practice?</li>
-</ul>
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Integration Was Necessary, But Incomplete</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'warm-gray': {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            300: '#d6d3d1',
+                            400: '#a8a29e',
+                            500: '#78716c',
+                            600: '#57534e',
+                            700: '#44403c',
+                            800: '#292524',
+                            900: '#1c1917'
+                        },
+                        'earth': {
+                            50: '#fefdf9',
+                            100: '#fdf9f0',
+                            200: '#f9f0e3',
+                            300: '#f5e6d3',
+                            400: '#f0d9bd',
+                            500: '#e8c99f',
+                            600: '#ddb574',
+                            700: '#d19c4f',
+                            800: '#c0822e',
+                            900: '#a86b1b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(120, 113, 108, 0.8) 0%, rgba(29, 25, 23, 0.9) 100%);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .blur-backdrop {
+            backdrop-filter: blur(8px);
+        }
+        
+        /* Mermaid Chart Styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none; /* 防止触摸设备上的默认行为 */
+            -webkit-user-select: none; /* 防止文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+    .mermaid-control-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Enhanced contrast for mermaid elements */
+    .mermaid .node rect,
+    .mermaid .node circle,
+    .mermaid .node ellipse,
+    .mermaid .node polygon {
+        stroke-width: 2px !important;
+        stroke: #374151 !important;
+    }
+    
+    .mermaid .node .label {
+        color: #1f2937 !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+        text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+    }
+    
+    .mermaid .edgePath .path {
+        stroke: #6b7280 !important;
+        stroke-width: 2px !important;
+    }
+    
+    .mermaid .edgeLabel {
+        background-color: rgba(255,255,255,0.95) !important;
+        color: #374151 !important;
+        font-weight: 500 !important;
+        border-radius: 4px !important;
+        padding: 2px 6px !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
+    /* Timeline specific styling with better contrast */
+    .mermaid .section0 {
+        fill: #fef3c7 !important;
+        stroke: #f59e0b !important;
+    }
+    
+    .mermaid .section1 {
+        fill: #dbeafe !important;
+        stroke: #3b82f6 !important;
+    }
+    
+    .mermaid .section2 {
+        fill: #d1fae5 !important;
+        stroke: #10b981 !important;
+    }
+    
+    .mermaid .section3 {
+        fill: #fee2e2 !important;
+        stroke: #ef4444 !important;
+    }
+    
+    .mermaid .cScale0, .mermaid .cScale1, .mermaid .cScale2, .mermaid .cScale3 {
+        fill: #1f2937 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Decision tree node styling */
+    .mermaid .node rect[style*="fill:#e3f2fd"] {
+        fill: #eff6ff !important;
+        stroke: #3b82f6 !important;
+    }
+    
+    .mermaid .node rect[style*="fill:#f3e5f5"] {
+        fill: #fdf4ff !important;
+        stroke: #a855f7 !important;
+    }
+    
+    .mermaid .node rect[style*="fill:#e8f5e8"] {
+        fill: #f0fdf4 !important;
+        stroke: #22c55e !important;
+    }
+    
+    @media (max-width: 1024px) {
+        .mermaid-control-btn:not(.reset-zoom) {
+            display: none;
+        }
+        .mermaid-controls {
+            top: auto;
+            bottom: 15px;
+            right: 15px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        /* Make images responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+</style>
+  </head>
+
+  <body class="bg-warm-gray-50 font-sans text-warm-gray-800 leading-relaxed overflow-x-hidden">
+    <!-- Toggle Button for Mobile -->
+    <button id="toc-toggle" class="fixed top-4 left-4 z-50 p-2 bg-white rounded shadow md:hidden">
+      <i class="fas fa-bars text-warm-gray-700"></i>
+    </button>
+
+    <!-- Fixed Table of Contents -->
+    <nav id="toc-nav" class="fixed left-0 top-0 h-full w-72 bg-white shadow-xl z-50 overflow-y-auto blur-backdrop transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-6 border-b border-warm-gray-200">
+        <h3 class="font-serif font-semibold text-lg text-warm-gray-900">Table of Contents</h3>
+      </div>
+      <div class="p-4 space-y-2">
+        <a href="#hero" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Executive Summary</a>
+        <a href="#thesis" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Core Thesis</a>
+        <a href="#pillar1" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Pillar 1: Economic Data</a>
+        <a href="#pillar2" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Pillar 2: Segregation&#39;s Costs</a>
+        <a href="#pillar3" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Pillar 3: Neoliberal Abandonment</a>
+        <a href="#pillar4" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Pillar 4: Administrative Capitalism</a>
+        <a href="#anti-integration" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Handling Anti-Integration Arguments</a>
+        <a href="#closing" class="block px-3 py-2 text-sm text-warm-gray-700 hover:bg-warm-gray-100 rounded transition-colors">Killer Closing</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="ml-0 md:ml-72" id="main-content">
+      <!-- Hero Section -->
+      <section id="hero" class="relative min-h-screen bg-warm-gray-100">
+        <div class="absolute inset-0">
+          <img src="https://kimi-web-img.moonshot.cn/img/exhibits.sjsu.edu/d6f14a8ac00f486c14891a1c53a7aa1eac3177c5.jpg" alt="1960s civil rights demonstration" class="w-full h-full object-cover opacity-20" size="wallpaper" aspect="wide" style="photo" query="1960s civil rights march" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-4 md:px-8 py-8 md:py-16">
+          <!-- Bento Grid Layout -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 min-h-screen">
+            <!-- Title Block -->
+            <div class="md:col-span-8 md:row-span-2 flex flex-col justify-center">
+              <h1 class="font-serif text-4xl md:text-6xl font-bold text-white text-shadow mb-6 leading-tight">
+                <em class="block text-2xl md:text-3xl mb-2 text-earth-300">Integration Was Necessary,</em>
+                But Incomplete
+              </h1>
+              <p class="text-lg md:text-xl text-warm-gray-200 font-light max-w-2xl">
+                A nuanced case for understanding racial integration&#39;s measurable gains,
+                abandoned potential, and the true sources of persistent inequality
+              </p>
+            </div>
+
+            <!-- Key Insight Cards -->
+            <div class="md:col-span-4 bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-xl">
+              <h3 class="font-serif text-xl font-semibold mb-4 text-warm-gray-900">
+                <i class="fas fa-chart-line text-earth-600 mr-2"></i>
+                Wealth Gap Reality
+              </h3>
+              <p class="text-warm-gray-700 text-sm leading-relaxed">
+                The Black-white wealth gap closed faster during the Civil Rights era (1960-1980)
+                than any other period in American history, then stagnated precisely when
+                integration efforts were abandoned.
+              </p>
+            </div>
+
+            <div class="md:col-span-4 bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-xl">
+              <h3 class="font-serif text-xl font-semibold mb-4 text-warm-gray-900">
+                <i class="fas fa-balance-scale text-earth-600 mr-2"></i>
+                The Critical Distinction
+              </h3>
+              <p class="text-warm-gray-700 text-sm leading-relaxed">
+                Legal integration was achieved; economic integration was abandoned.
+                The failure to achieve full economic justice is mistaken for integration&#39;s failure.
+              </p>
+            </div>
+
+            <!-- Visual Timeline -->
+            <div class="md:col-span-12 bg-white/95 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+              <h3 class="font-serif text-2xl font-semibold mb-6 text-warm-gray-900 text-center">
+                The Integration Timeline: Promise vs. Reality
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-earth-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-white font-bold">1964</span>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-2">Civil Rights Act</h4>
+                  <p class="text-sm text-warm-gray-600">Legal barriers dismantled, formal equality established</p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-green-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-white font-bold">1965</span>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-2">Voting Rights Act</h4>
+                  <p class="text-sm text-warm-gray-600">Political participation dramatically expanded</p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-white font-bold">1968</span>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-2">Fair Housing Act</h4>
+                  <p class="text-sm text-warm-gray-600">Residential segregation formally prohibited</p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-white font-bold">1983</span>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-2">Stagnation Begins</h4>
+                  <p class="text-sm text-warm-gray-600">Wealth gap convergence terminates with neoliberal shift</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Thesis Section -->
+      <section id="thesis" class="py-8 md:py-16 bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-4xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-12 text-center">
+              The Nuanced Case for Integration
+            </h2>
+
+            <div class="prose prose-lg max-w-none">
+              <div class="bg-earth-50 border-l-4 border-earth-500 p-8 mb-12 rounded-r-lg">
+                <p class="text-xl font-semibold text-warm-gray-900 mb-4">
+                  <strong>Core Thesis:</strong> Integration delivered measurable economic gains to Black Americans during 1964-1983, with the Black-white wealth gap closing faster than any other period in U.S. history. Stagnation since 1983 coincides precisely with neoliberal abandonment of race-conscious policy, not integration&#39;s inherent failure.
+                </p>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-6 text-warm-gray-900">
+                    Integration&#39;s Demonstrated Success
+                  </h3>
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        <strong>The only period</strong> of faster-than-projected wealth gap closure was the Civil Rights era (1960s-1980s)
+                      </p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        Black poverty rates dropped significantly while professional employment expanded dramatically
+                      </p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        The Black middle class was created through access to previously segregated institutions
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="font-serif text-2xl font-semibold mb-6 text-warm-gray-900">
+                    The Abandonment Problem
+                  </h3>
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-times-circle text-red-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        Wealth gap stagnation began in 1983 when race-conscious policy was abandoned
+                      </p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-times-circle text-red-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        Courts began striking down affirmative action while enforcement agencies were defunded
+                      </p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-times-circle text-red-600 mt-1"></i>
+                      <p class="text-warm-gray-700">
+                        Monetary policy prioritized inflation control over full employment, harming Black workers disproportionately
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-warm-gray-50 p-8 rounded-lg mb-12">
+                <h3 class="font-serif text-2xl font-semibold mb-4 text-warm-gray-900">
+                  The Critical Distinction: Legal vs. Economic Integration
+                </h3>
+                <p class="text-warm-gray-700 mb-4">
+                  The analytical sophistication of this framework depends on maintaining rigorous distinction between three levels of racial transformation:
+                </p>
+                <ul class="space-y-3 text-warm-gray-700">
+                  <li class="flex items-start space-x-3">
+                    <span class="font-semibold text-earth-600">1.</span>
+                    <span><strong>Legal integration</strong>—the dismantling of Jim Crow statutes and establishment of formal nondiscrimination principles—was substantially achieved</span>
+                  </li>
+                  <li class="flex items-start space-x-3">
+                    <span class="font-semibold text-earth-600">2.</span>
+                    <span><strong>Economic integration</strong>—the redistribution of resources and transformation of institutional practices—was never completed</span>
+                  </li>
+                  <li class="flex items-start space-x-3">
+                    <span class="font-semibold text-earth-600">3.</span>
+                    <span><strong>Substantive equality</strong>—genuine equal opportunity and outcome parity—was never approached</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pillar 1: Economic Data -->
+      <section id="pillar1" class="py-8 md:py-16 bg-warm-gray-50">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-16 text-center">
+              Pillar 1: The Economic Data Proves Integration Worked
+            </h2>
+
+            <!-- Wealth Gap Timeline -->
+            <div class="mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                The Wealth Gap Actually Closed During Civil Rights
+              </h3>
+
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <p class="text-warm-gray-700 mb-6">
+                  According to Princeton economist Ellora Derenoncourt&#39;s research, there is only one period where the Black-white wealth gap closed faster than would be expected under equal savings rates: the 1960s-1980s Civil Rights era <a href="https://cepr.org/voxeu/columns/wealth-two-nations-us-racial-wealth-gap-1860-2020" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[1]</a>.
+                </p>
+
+                <!-- Historical Timeline using Mermaid -->
+                <div class="mermaid-container">
+                  <div class="mermaid-controls">
+                    <button class="mermaid-control-btn zoom-in" title="放大">
+                      <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="mermaid-control-btn zoom-out" title="缩小">
+                      <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="mermaid-control-btn reset-zoom" title="重置">
+                      <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                      <i class="fas fa-expand"></i>
+                    </button>
+                  </div>
+                  <div class="mermaid">
+                    timeline
+                    title &#34;Historical Trajectory of Black-White Wealth Ratio&#34;
+
+                    1860 : &#34;56:1 ratio&#34;
+                    : &#34;Slavery era comprehensive expropriation&#34;
+
+                    1912 : &#34;11:1 ratio&#34;
+                    : &#34;50 years post-Emancipation&#34;
+
+                    1950 : &#34;7:1 ratio&#34;
+                    : &#34;Segregation era consolidation&#34;
+
+                    1980 : &#34;~6:1 ratio&#34;
+                    : &#34;Active integration period&#34;
+
+                    2020 : &#34;~6:1 ratio&#34;
+                    : &#34;No progress since 1983&#34;
+                  </div>
+                </div>
+
+                <div class="mt-6 grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">Key Findings from Derenoncourt et al. &#34;Wealth of Two Nations&#34;</h4>
+                    <ul class="space-y-3 text-warm-gray-700">
+                      <li class="flex items-start space-x-2">
+                        <i class="fas fa-chart-line text-green-600 mt-1 text-sm"></i>
+                        <span>Only period of faster-than-equal-conditions convergence: 1960s-1980s</span>
+                      </li>
+                      <li class="flex items-start space-x-2">
+                        <i class="fas fa-chart-line text-green-600 mt-1 text-sm"></i>
+                        <span>Equal-conditions benchmark predicts 3:1 gap today; actual gap is 6:1</span>
+                      </li>
+                      <li class="flex items-start space-x-2">
+                        <i class="fas fa-chart-line text-green-600 mt-1 text-sm"></i>
+                        <span>Civil Rights-era acceleration exceeded structural benchmarks</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">Policy Attribution</h4>
+                    <p class="text-warm-gray-700 mb-4">
+                      Researchers explicitly attribute this acceleration to specific policy interventions <a href="https://equitablegrowth.org/wp-content/uploads/2022/10/100522-Wealth-of-two-nations-The-U.S.-racial-wealth-gap-1860-2020-Derenoncourt-Kim-Kuhn-and-Schularick.pdf" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[3]</a>:
+                    </p>
+                    <ul class="space-y-2 text-warm-gray-700 text-sm">
+                      <li>• Civil Rights Act of 1964</li>
+                      <li>• Voting Rights Act of 1965</li>
+                      <li>• Minimum wage legislation</li>
+                      <li>• Fair Housing Act of 1968</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Income and Employment Gains -->
+            <div class="mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                Income Gains Were Real and Significant
+              </h3>
+
+              <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                  <div class="text-center mb-4">
+                    <i class="fas fa-arrow-down text-3xl text-green-600"></i>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3 text-center">Poverty Rate Reduction</h4>
+                  <p class="text-warm-gray-700 text-sm text-center">
+                    Black poverty rates dropped from approximately 55% in 1959 to below 35% by 1974
+                  </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                  <div class="text-center mb-4">
+                    <i class="fas fa-briefcase text-3xl text-blue-600"></i>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3 text-center">Professional Expansion</h4>
+                  <p class="text-warm-gray-700 text-sm text-center">
+                    Black professional employment tripled from 4% to 12% of Black employment
+                  </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                  <div class="text-center mb-4">
+                    <i class="fas fa-users text-3xl text-earth-600"></i>
+                  </div>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3 text-center">Middle Class Creation</h4>
+                  <p class="text-warm-gray-700 text-sm text-center">
+                    Black middle class expanded from under 10% to over 25% of households
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- The 1983 Inflection Point -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-8 rounded-r-lg mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-6 text-warm-gray-900">
+                The 1983 Inflection Point: When Convergence Stopped
+              </h3>
+              <p class="text-warm-gray-700 mb-4">
+                The year 1983 emerges from multiple data sources as the definitive end of measurable wealth gap convergence. This timing corresponds to the consolidation of Reagan-era policy changes <a href="https://equitablegrowth.org/wp-content/uploads/2022/10/100522-Wealth-of-two-nations-The-U.S.-racial-wealth-gap-1860-2020-Derenoncourt-Kim-Kuhn-and-Schularick.pdf" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[2]</a>.
+              </p>
+              <p class="text-warm-gray-700">
+                As the Russell Sage Foundation notes, <strong>&#34;In terms of the wealth gap, there&#39;s been almost no progress&#34;</strong> since the Kerner Commission&#39;s 1968 report <a href="https://gsas.harvard.edu/news/colloquy-podcast-how-slaverys-legacy-lives-racial-wealth-gap" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[7]</a>. The problem isn&#39;t integration—it&#39;s that integration was abandoned before completion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pillar 2: Segregation's Costs -->
+      <section id="pillar2" class="py-8 md:py-16 bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-16 text-center">
+              Pillar 2: Segregation Had Measurable Economic Costs
+            </h2>
+
+            <div class="mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                The Urban Institute &#34;Cost of Segregation&#34; Framework
+              </h3>
+
+              <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-warm-gray-50 p-8 rounded-lg">
+                  <h4 class="font-semibold text-warm-gray-800 mb-6">Four Dimensions of Harm</h4>
+                  <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                      <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-dollar-sign text-red-600"></i>
+                      </div>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800 mb-1">Income Effects</h5>
+                        <p class="text-warm-gray-700 text-sm">Reduced Black per capita income through spatial mismatch and limited networks</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                      <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-heartbeat text-blue-600"></i>
+                      </div>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800 mb-1">Health Effects</h5>
+                        <p class="text-warm-gray-700 text-sm">Lower life expectancy due to environmental exposure and reduced healthcare access</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                      <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-shield-alt text-yellow-600"></i>
+                      </div>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800 mb-1">Safety Effects</h5>
+                        <p class="text-warm-gray-700 text-sm">Elevated homicide rates in highly segregated zones</p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                      <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-graduation-cap text-green-600"></i>
+                      </div>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800 mb-1">Education Effects</h5>
+                        <p class="text-warm-gray-700 text-sm">Diminished attainment in segregated commuting zones</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-8">
+                  <div class="bg-earth-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">Housing Market Harms</h4>
+                    <p class="text-warm-gray-700 text-sm mb-4">
+                      Research by Kermani and Wong analyzing 9 million home sales reveals systematic discrimination <a href="https://www.npr.org/sections/money/2022/06/14/1104660659/why-the-racial-wealth-gap-is-so-hard-to-close" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[6]</a>:
+                    </p>
+                    <ul class="space-y-2 text-sm text-warm-gray-700">
+                      <li>• Black homeowners experience 3.7 percentage point lower annual returns</li>
+                      <li>• Hispanic homeowners experience 2.0 percentage point lower annual returns</li>
+                      <li>• Distressed sales drive 40% of the return gap</li>
+                      <li>• White-to-Black home value ratio unchanged since 1970</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-blue-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">Chicago Case Study</h4>
+                    <p class="text-warm-gray-700 text-sm mb-4">
+                      The Chicago metropolitan area in 2010 was 36% below median black-white segregation levels <a href="https://metroplanning.org/projects/the-cost-of-segregation/" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[15]</a>. Projected outcomes at median segregation levels include:
+                    </p>
+                    <ul class="space-y-2 text-sm text-warm-gray-700">
+                      <li>• Higher Black per capita incomes</li>
+                      <li>• Longer Black life expectancy</li>
+                      <li>• Lower Black homicide rates</li>
+                      <li>• Improved educational attainment</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pillar 3: Neoliberal Abandonment -->
+      <section id="pillar3" class="py-8 md:py-16 bg-warm-gray-50">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-16 text-center">
+              Pillar 3: Distinguishing Integration from Neoliberal Abandonment
+            </h2>
+
+            <!-- The Conflation Error -->
+            <div class="mb-16">
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                  The Conflation Error: Mistaking Abandonment for Failure
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">The Actual Pattern</h4>
+                    <div class="space-y-4">
+                      <div class="bg-green-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-green-800 mb-2">1960-1980: Active Integration</h5>
+                        <ul class="text-green-700 text-sm space-y-1">
+                          <li>• Wealth gap converged faster than benchmarks</li>
+                          <li>• Income and occupational upgrading</li>
+                          <li>• Poverty reduction and middle class creation</li>
+                          <li>• Political power expansion</li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-red-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-red-800 mb-2">1980-Present: Abandoned Integration</h5>
+                        <ul class="text-red-700 text-sm space-y-1">
+                          <li>• No measurable wealth gap narrowing</li>
+                          <li>• Income convergence stagnation</li>
+                          <li>• Poverty reduction stalled</li>
+                          <li>• Residential segregation persistence</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-4">Mechanisms of Abandonment</h4>
+                    <div class="space-y-4">
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-gavel text-blue-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Judicial</h5>
+                          <p class="text-warm-gray-700 text-sm">Court decisions restricting affirmative action and fair housing enforcement</p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-coins text-green-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Legislative</h5>
+                          <p class="text-warm-gray-700 text-sm">Defunding of EEOC, HUD, and DOJ Civil Rights Division</p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-building text-earth-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Administrative</h5>
+                          <p class="text-warm-gray-700 text-sm">Deprioritization of race-conscious remediation</p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-chart-bar text-purple-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Monetary</h5>
+                          <p class="text-warm-gray-700 text-sm">Federal Reserve prioritization of inflation control over full employment</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Policy Shift Table -->
+            <div class="mb-16">
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                  The Neoliberal Policy Shift Across Institutional Domains
+                </h3>
+
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse">
+                    <thead>
+                      <tr class="bg-warm-gray-100">
+                        <th class="border border-warm-gray-200 px-4 py-3 text-left font-semibold text-warm-gray-800">Domain</th>
+                        <th class="border border-warm-gray-200 px-4 py-3 text-left font-semibold text-warm-gray-800">Pre-1980 Active Integration</th>
+                        <th class="border border-warm-gray-200 px-4 py-3 text-left font-semibold text-warm-gray-800">Post-1980 Neoliberal Abandonment</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-warm-gray-200 px-4 py-3 font-semibold text-warm-gray-800">Judicial</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Expansive interpretation of civil rights statutes; proactive disparate impact enforcement</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Restrictive interpretation; strict scrutiny for race-conscious remedies</td>
+                      </tr>
+                      <tr class="bg-warm-gray-50">
+                        <td class="border border-warm-gray-200 px-4 py-3 font-semibold text-warm-gray-800">Legislative</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">CETA public employment; social program expansion; fair housing implementation</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Defunding of enforcement agencies; welfare reform with work requirements</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-warm-gray-200 px-4 py-3 font-semibold text-warm-gray-800">Administrative</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Aggressive EEOC litigation; HUD testing and enforcement</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Complaint-driven enforcement; backlog accumulation</td>
+                      </tr>
+                      <tr class="bg-warm-gray-50">
+                        <td class="border border-warm-gray-200 px-4 py-3 font-semibold text-warm-gray-800">Monetary</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Full employment prioritization; accommodative policy for labor market tightness</td>
+                        <td class="border border-warm-gray-200 px-4 py-3 text-warm-gray-700 text-sm">Inflation control prioritization; asymmetric response to unemployment</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- The Kerner Commission Warning -->
+            <div class="bg-earth-50 border-l-4 border-earth-500 p-8 rounded-r-lg">
+              <h3 class="font-serif text-2xl font-semibold mb-4 text-warm-gray-900">
+                The Kerner Commission&#39;s Prescient Warning
+              </h3>
+              <blockquote class="text-xl italic text-warm-gray-800 mb-4">
+                &#34;White institutions created it, white institutions maintain it, and white society condones it.&#34;
+              </blockquote>
+              <p class="text-warm-gray-700">
+                The Kerner Commission&#39;s 1968 report directly anticipated the form-substance distinction. Legal desegregation without economic transformation would leave fundamental structures of racial inequality intact. The subsequent five decades have validated this warning <a href="https://gsas.harvard.edu/news/colloquy-podcast-how-slaverys-legacy-lives-racial-wealth-gap" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[7]</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pillar 4: Administrative Capitalism -->
+      <section id="pillar4" class="py-8 md:py-16 bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-16 text-center">
+              Pillar 4: The &#34;Deep State&#34; Administrative Capitalism Angle
+            </h2>
+
+            <div class="mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                The Dual Administrative Apparatus
+              </h3>
+
+              <div class="grid md:grid-cols-2 gap-12 mb-12">
+                <div class="bg-green-50 p-8 rounded-lg">
+                  <h4 class="font-semibold text-green-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    Capital Control: Maintained &amp; Strengthened
+                  </h4>
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-university text-green-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">Federal Reserve</h5>
+                        <p class="text-warm-gray-700 text-sm">Enhanced operational independence, inflation targeting framework</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-shield-alt text-green-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">Financial Regulation</h5>
+                        <p class="text-warm-gray-700 text-sm">SEC enforcement, Treasury coordination, crisis management capacity</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-globe text-green-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">Trade Negotiation</h5>
+                        <p class="text-warm-gray-700 text-sm">USTR capacity, international agreement implementation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-red-50 p-8 rounded-lg">
+                  <h4 class="font-semibold text-red-800 mb-6 flex items-center">
+                    <i class="fas fa-balance-scale mr-3"></i>
+                    Justice &amp; Redistribution: Dismantled
+                  </h4>
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-briefcase text-red-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">EEOC</h5>
+                        <p class="text-warm-gray-700 text-sm">Backlog accumulation, reduced litigation, complaint-driven processing</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-home text-red-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">HUD Fair Housing</h5>
+                        <p class="text-warm-gray-700 text-sm">Reduced testing, delayed disparate impact enforcement</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                      <i class="fas fa-gavel text-red-600 mt-1"></i>
+                      <div>
+                        <h5 class="font-semibold text-warm-gray-800">DOJ Civil Rights</h5>
+                        <p class="text-warm-gray-700 text-sm">Reduced pattern-or-practice litigation, deprioritized voting rights</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-warm-gray-100 p-8 rounded-lg">
+                <h4 class="font-semibold text-warm-gray-800 mb-4 text-center">
+                  The Selective Administrative State: Integration Was Abandoned as Policy Priority
+                </h4>
+                <p class="text-warm-gray-700 text-center">
+                  The same administrative state that manages capitalism also implemented and then abandoned integration,
+                  revealing selective rather than uniform state capacity. The failure to achieve substantive racial economic
+                  equality is not general state failure but specific failure of redistributive capacity.
+                </p>
+              </div>
+            </div>
+
+            <!-- Federal Reserve Policy -->
+            <div class="mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                Federal Reserve Policy: Systematic Disadvantage
+              </h3>
+
+              <div class="bg-white border border-warm-gray-200 p-8 rounded-lg">
+                <div class="grid md:grid-cols-3 gap-8">
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <i class="fas fa-chart-line text-2xl text-red-600"></i>
+                    </div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-3">The Volcker Shock</h4>
+                    <p class="text-warm-gray-700 text-sm">
+                      1979-1982: Intentional recession generated 20%+ Black unemployment,
+                      disproportionately harming Black workers
+                    </p>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <i class="fas fa-balance-scale text-2xl text-yellow-600"></i>
+                    </div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-3">Asymmetric Response</h4>
+                    <p class="text-warm-gray-700 text-sm">
+                      Urgent action against inflation, gradual accommodation for unemployment—
+                      systematically disadvantages Black workers
+                    </p>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <i class="fas fa-clock text-2xl text-blue-600"></i>
+                    </div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-3">Enduring Consequences</h4>
+                    <p class="text-warm-gray-700 text-sm">
+                      Deindustrialization, weakened unions, transformed financial sector—
+                      persistent disadvantage for Black manufacturing employment
+                    </p>
+                  </div>
+                </div>
+
+                <p class="text-warm-gray-700 mt-6 text-center">
+                  This framework remained largely intact through 2020, with only modest recent modification toward &#34;inclusive full employment&#34; rhetoric <a href="https://ideas.repec.org/p/bon/boncrc/crctr224_2022_368.html" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[9]</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Anti-Integration Arguments -->
+      <section id="anti-integration" class="py-8 md:py-16 bg-warm-gray-50">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-warm-gray-900 mb-16 text-center">
+              Handling Anti-Integration Arguments
+            </h2>
+
+            <!-- Argument 1: Integration Destroyed Black Businesses -->
+            <div class="mb-16">
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                  &#34;Integration Destroyed Black Businesses/Institutions&#34;
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-6">The Reality: Segregation Starved Black Capital</h4>
+
+                    <div class="space-y-6">
+                      <div class="bg-red-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-red-800 mb-2">Segregation-Era Constraints</h5>
+                        <ul class="text-red-700 text-sm space-y-1">
+                          <li>• Forced concentration in narrow, crowded markets (barber shops, small retail)</li>
+                          <li>• No access to mainstream credit, insurance, or expansion capital</li>
+                          <li>• Black middle class under 10% until 1960, heavily dependent on segregated services</li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-green-50 p-4 rounded-lg">
+                        <h5 class="font-semibold text-green-800 mb-2">1960-1980 Sectoral Transformation</h5>
+                        <ul class="text-green-700 text-sm space-y-1">
+                          <li>• Finance, Insurance, Real Estate: +185.7%</li>
+                          <li>• Business Services: +175%</li>
+                          <li>• Wholesale Industries: +111.8%</li>
+                          <li>• Economic diversification and upgrading, not destruction</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-6">Post-1980 Challenges: Different Causes</h4>
+
+                    <div class="space-y-4">
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-hammer text-earth-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Urban Renewal Displacement</h5>
+                          <p class="text-warm-gray-700 text-sm">&#34;Slum clearance&#34; programs destroyed established Black business districts before integration&#39;s effects were realized <a href="https://economics.princeton.edu/working-papers/wealth-of-two-nations-the-u-s-racial-wealth-gap-1860-2020/" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[20]</a>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-store text-blue-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Retail Chain Concentration</h5>
+                          <p class="text-warm-gray-700 text-sm">Market consolidation disadvantaged small independent businesses of all races <a href="https://www.peoplespolicyproject.org/2019/03/05/wealth-inequality-across-class-and-race-in-5-graphs/" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[23]</a>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-laptop text-purple-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">&#34;Amazon-ization&#34; of Commerce</h5>
+                          <p class="text-warm-gray-700 text-sm">E-commerce shift particularly vulnerable due to historical underinvestment in technology</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-warm-gray-100 rounded-lg">
+                      <p class="text-warm-gray-700 text-sm">
+                        <strong>Key Point:</strong> These challenges reflect incomplete integration, not integration itself.
+                        Active policy could have addressed them within an integrated framework.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Argument 2: Psychological Colonization -->
+            <div class="mb-16">
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                  &#34;Integration Was Psychological Colonization/Assimilation&#34;
+                </h3>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                  <div class="bg-blue-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-4 flex items-center">
+                      <i class="fas fa-user mr-2"></i>
+                      Malcolm X&#39;s Actual Position
+                    </h4>
+                    <div class="space-y-3 text-sm text-warm-gray-700">
+                      <p><strong>Separation as Strategy,</strong> Not Segregation as Permanent Condition</p>
+                      <p>The &#34;internal colony&#34; framework sought national liberation, not cultural preservation through permanent separation</p>
+                      <p>Distinguished from modern anti-integrationism by transformative aspirations</p>
+                    </div>
+                  </div>
+
+                  <div class="bg-green-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-4 flex items-center">
+                      <i class="fas fa-building mr-2"></i>
+                      Institutional Transformation
+                    </h4>
+                    <div class="space-y-3 text-sm text-warm-gray-700">
+                      <p>EEOC, affirmative action, and multicultural curricula transformed white institutions</p>
+                      <p>Dismantled assumptions of white institutional supremacy</p>
+                      <p>Revealed contingent and constructed nature of institutional hierarchies</p>
+                    </div>
+                  </div>
+
+                  <div class="bg-purple-50 p-6 rounded-lg">
+                    <h4 class="font-semibold text-purple-800 mb-4 flex items-center">
+                      <i class="fas fa-globe mr-2"></i>
+                      Cultural Production Boom
+                    </h4>
+                    <div class="space-y-3 text-sm text-warm-gray-700">
+                      <p>Black cultural production achieved unprecedented global dominance post-integration</p>
+                      <p>Hip-hop, visual arts, film, and literature flourished in integrated conditions</p>
+                      <p>Integration enabled cultural reach to global audiences and commercial success</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Argument 3: We Had More Unity -->
+            <div class="mb-16">
+              <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-8 text-warm-gray-900">
+                  &#34;We Had More &#39;Unity&#39; Under Segregation&#34;
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-6">The Duress Critique</h4>
+                    <div class="space-y-4">
+                      <div class="bg-red-50 p-4 rounded-lg">
+                        <p class="text-red-700 text-sm">
+                          <strong>Unity under duress is not genuine solidarity.</strong> Black communities were geographically concentrated because they were systematically excluded from white neighborhoods, not because they chose collective residence for intrinsic benefits.
+                        </p>
+                      </div>
+                      <div class="bg-yellow-50 p-4 rounded-lg">
+                        <p class="text-yellow-700 text-sm">
+                          <strong>Internal class stratification</strong> was substantial within segregated communities. The Black elite occupied positions of privilege relative to the masses, with interests that frequently diverged from broader community welfare <a href="https://economics.princeton.edu/working-papers/wealth-of-two-nations-the-u-s-racial-wealth-gap-1860-2020/" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[10]</a>.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 class="font-semibold text-warm-gray-800 mb-6">Post-Integration Political Power Expansion</h4>
+                    <div class="space-y-4">
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-city text-blue-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Black Mayors</h5>
+                          <p class="text-warm-gray-700 text-sm">Carl Stokes (Cleveland), Richard Hatcher (Gary), Kenneth Gibson (Newark), Tom Bradley (Los Angeles) <a href="https://home.treasury.gov/news/featured-stories/racial-differences-in-economic-security-housing" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[26]</a>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-users text-green-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Congressional Black Caucus</h5>
+                          <p class="text-warm-gray-700 text-sm">Formed in 1971, representing collective political institution-building</p>
+                        </div>
+                      </div>
+
+                      <div class="flex items-start space-x-3">
+                        <i class="fas fa-vote-yea text-purple-600 mt-1"></i>
+                        <div>
+                          <h5 class="font-semibold text-warm-gray-800">Voting Rights Enforcement</h5>
+                          <p class="text-warm-gray-700 text-sm">Expanded participation, electoral system modifications, enhanced representation <a href="https://www.openicpsr.org/openicpsr/project/194203/version/V1/view" class="text-earth-600 hover:text-earth-700 underline" target="_blank">[22]</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Argument 4: Look at the Wealth Gap -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-8 rounded-r-lg mb-16">
+              <h3 class="font-serif text-2xl font-semibold mb-6 text-warm-gray-900">
+                &#34;Look at the Wealth Gap Today—Integration Failed&#34;
+              </h3>
+
+              <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                  <i class="fas fa-chart-line text-4xl text-red-600 mb-4"></i>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3">Correlation vs. Causation</h4>
+                  <p class="text-warm-gray-700 text-sm">
+                    Gap stagnated when integration efforts stopped, not because they happened.
+                    Temporal pattern directly contradicts anti-integration attribution.
+                  </p>
+                </div>
+
+                <div class="text-center">
+                  <i class="fas fa-calendar-alt text-4xl text-blue-600 mb-4"></i>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3">The 1983 Inflection</h4>
+                  <p class="text-warm-gray-700 text-sm">
+                    &#34;No measurable narrowing&#34; since 1983 precisely coincides with
+                    neoliberal policy shift, not integration implementation.
+                  </p>
+                </div>
+
+                <div class="text-center">
+                  <i class="fas fa-flask text-4xl text-green-600 mb-4"></i>
+                  <h4 class="font-semibold text-warm-gray-800 mb-3">Control Experiment</h4>
+                  <p class="text-warm-gray-700 text-sm">
+                    Jurisdictions with sustained integration efforts show better outcomes.
+                    Active policy consistently outperforms abandonment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Killer Closing -->
+      <section id="closing" class="py-8 md:py-16 bg-warm-gray-900 text-white">
+        <div class="container mx-auto px-4 md:px-8">
+          <div class="max-w-4xl mx-auto text-center">
+            <h2 class="font-serif text-4xl font-bold mb-16">
+              Killer Closing: The Broken Promise Argument
+            </h2>
+
+            <div class="space-y-12">
+              <div class="bg-white/10 backdrop-blur-sm p-8 rounded-lg">
+                <blockquote class="text-2xl font-serif italic mb-6">
+                  &#34;My opponent sees the Black-white wealth gap and blames integration.
+                  But the data shows the gap was closing when integration was active,
+                  and stagnated when we abandoned it.&#34;
+                </blockquote>
+                <p class="text-lg text-warm-gray-200">
+                  Derenoncourt et al.&#39;s finding is unambiguous: the 1960-1980 period represents the only episode of faster-than-equal-conditions convergence in 160 years of data.
+                </p>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                  <h3 class="font-serif text-xl font-semibold mb-4">Black Business Reality</h3>
+                  <p class="text-warm-gray-200">
+                    Black capital was suffocating under segregation&#39;s constraints. Integration enabled sectoral transformation: finance (+185.7%), business services (+175%), wholesale (+111.8%). The decline narrative ignores substantial gains.
+                  </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                  <h3 class="font-serif text-xl font-semibold mb-4">Cultural Production Boom</h3>
+                  <p class="text-warm-gray-200">
+                    Black cultural production has never been stronger or more globally dominant than in the post-integration era. Hip-hop, visual arts, film, and literature achievements contradict cultural loss narratives.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-earth-600/20 backdrop-blur-sm p-8 rounded-lg">
+                <h3 class="font-serif text-2xl font-semibold mb-6">The Accountability Shift</h3>
+                <p class="text-xl text-warm-gray-100 leading-relaxed">
+                  The failure isn&#39;t that we integrated. The failure is that we stopped—that we chose &#34;colorblind&#34; indifference over race-conscious remediation, that we dismantled the administrative apparatus of justice while keeping the administrative apparatus of capital control.
+                </p>
+                <p class="text-lg text-warm-gray-200 mt-4">
+                  Integration didn&#39;t fail Black America. American state capitalism failed to complete the integration it promised, and now some want to blame the victims for believing in a promise that was broken, not false.
+                </p>
+              </div>
+
+              <!-- King's Vision Connection -->
+              <div class="bg-earth-500/20 backdrop-blur-sm p-8 rounded-lg">
+                <h3 class="font-serif text-xl font-semibold mb-4">The King&#39;s Vision Connection</h3>
+                <blockquote class="text-lg italic text-warm-gray-100 mb-4">
+                  &#34;It is much easier to integrate a lunch counter than it is to guarantee a livable income.&#34;
+                </blockquote>
+                <p class="text-warm-gray-200">
+                  Martin Luther King Jr. recognized that legal integration was necessary but insufficient.
+                  The demand was not anti-integration but pro-completion: genuine equality requires the radical
+                  redistribution of economic and political power that integration&#39;s promise demands.
+                </p>
+              </div>
+
+              <!-- Final Call to Action -->
+              <div class="bg-white p-8 rounded-lg text-warm-gray-900">
+                <h3 class="font-serif text-2xl font-semibold mb-6">The Strategic Choice Framework</h3>
+                <p class="text-lg mb-6">
+                  The debate presents three alternatives with clear evidentiary bases:
+                </p>
+                <div class="grid md:grid-cols-3 gap-6">
+                  <div class="text-center p-4 bg-red-50 rounded-lg">
+                    <h4 class="font-semibold text-red-800 mb-2">Segregation</h4>
+                    <p class="text-red-700 text-sm">Measurable, documented harms documented by Urban Institute research</p>
+                  </div>
+                  <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Incomplete Integration</h4>
+                    <p class="text-yellow-700 text-sm">Partial gains, abandoned potential—this is actual historical outcome</p>
+                  </div>
+                  <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">Completed Integration</h4>
+                    <p class="text-green-700 text-sm">Unrealized promise requiring race-conscious remediation</p>
+                  </div>
+                </div>
+                <p class="text-lg mt-6 font-semibold">
+                  The evidence strongly supports completed integration. The question is whether we have the political will to pursue it.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f9f0e3',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#78716c',
+                lineColor: '#6b7280',
+                sectionBkgColor: '#f9f0e3',
+                altSectionBkgColor: '#f5f5f4',
+                gridColor: '#e7e5e4',
+                secondaryColor: '#f0f9ff',
+                tertiaryColor: '#f0fdf4',
+                background: '#fafaf9',
+                mainBkg: '#ffffff',
+                secondBkg: '#f9f0e3',
+                tertiaryBkg: '#f0f9ff',
+                primaryBorderColor: '#78716c',
+                primaryTextColor: '#1f2937',
+                secondaryTextColor: '#374151',
+                tertiaryTextColor: '#44403c',
+                lineColor: '#6b7280',
+                textColor: '#1f2937',
+                THEME_COLOR_LIMIT: 12
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            timeline: {
+                useMaxWidth: false,
+                padding: 20
+            },
+            fontSize: 14,
+            fontFamily: 'Inter, sans-serif'
+        });
+        
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize the mermaid controls after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMermaidControls();
+        });
+        
+        // TOC Toggle and Navigation
+        const tocNav = document.getElementById('toc-nav');
+        const tocToggle = document.getElementById('toc-toggle');
+        const mainContent = document.getElementById('main-content');
+        
+        if (tocToggle) {
+            tocToggle.addEventListener('click', function() {
+                tocNav.classList.toggle('translate-x-0');
+                tocNav.classList.toggle('-translate-x-full');
+            });
+        }
+        
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth < 768 && 
+                !tocNav.contains(event.target) && 
+                event.target !== tocToggle &&
+                !tocToggle.contains(event.target)) {
+                tocNav.classList.remove('translate-x-0');
+                tocNav.classList.add('-translate-x-full');
+            }
+        });
+        
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close TOC on mobile after clicking a link
+                    if (window.innerWidth < 768) {
+                        tocNav.classList.remove('translate-x-0');
+                        tocNav.classList.add('-translate-x-full');
+                    }
+                }
+            });
+        });
+        
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('bg-earth-100', 'text-earth-800');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('bg-earth-100', 'text-earth-800');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+    </script>
+  
+
 </body></html>
