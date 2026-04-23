@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WLFI SCANDAL — Trump's Crypto Scam Hiding in Plain Sight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'crypto-black': '#0a0a0f',
+                        'crypto-dark': '#12121a',
+                        'crypto-card': '#1a1a25',
+                        'crypto-border': '#2a2a3a',
+                        'crypto-gold': '#f0b90b',
+                        'crypto-amber': '#f7931a',
+                        'crypto-red': '#ff3b30',
+                        'crypto-red-dark': '#c62828',
+                    },
+                    animation: {
+                        'ticker': 'ticker 30s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        ticker: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(240, 185, 11, 0.2)' },
+                            '100%': { boxShadow: '0 0 20px rgba(240, 185, 11, 0.6), 0 0 40px rgba(240, 185, 11, 0.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0f;
+            color: #e4e4e7;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f0b90b 0%, #f7931a 50%, #ff3b30 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-red {
+            background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: rgba(26, 26, 37, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(42, 42, 58, 0.8);
+        }
+
+        .receipt-pattern {
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(240, 185, 11, 0.03) 10px,
+                rgba(240, 185, 11, 0.03) 20px
+            );
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(240, 185, 11, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(240, 185, 11, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .source-link {
+            color: #f0b90b;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(240, 185, 11, 0.4);
+            transition: all 0.2s;
+            font-size: 0.75rem;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+
+        .source-link:hover {
+            border-bottom: 1px solid #f0b90b;
+            color: #fff;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #f0b90b, #ff3b30);
+        }
+
+        .code-block {
+            background: #0d0d14;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .highlight-red {
+            background: rgba(255, 59, 48, 0.15);
+            border-left: 3px solid #ff3b30;
+            padding: 1rem 1.5rem;
+        }
+
+        .highlight-gold {
+            background: rgba(240, 185, 11, 0.1);
+            border-left: 3px solid #f0b90b;
+            padding: 1rem 1.5rem;
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f0b90b;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .evidence-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .evidence-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .comparison-row:hover {
+            background: rgba(240, 185, 11, 0.05);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a3a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f0b90b;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <!-- Breaking News Ticker -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-crypto-red-dark border-b border-crypto-red overflow-hidden h-10 flex items-center">
+        <div class="animate-ticker whitespace-nowrap flex items-center gap-8 text-white font-mono text-sm font-bold tracking-wider">
+            <span class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                BREAKING: Justin Sun files federal lawsuit against World Liberty Financial — April 21, 2026
+            </span>
+            <span class="text-crypto-gold">///</span>
+            <span>WLFI tokens down 70%+ from highs</span>
+            <span class="text-crypto-gold">///</span>
+            <span>Senate investigating Trump crypto ventures</span>
+            <span class="text-crypto-gold">///</span>
+            <span>SEC fraud charges against Sun dropped after $75M WLFI investment</span>
+            <span class="text-crypto-gold">///</span>
+            <span>5B WLFI tokens pledged as collateral on Dolomite</span>
+            <span class="text-crypto-gold">///</span>
+            <span>UAE-linked fund with CNPC ties wired $100M to project</span>
+            <span class="text-crypto-gold">///</span>
+            <span>OCC reviewing bank charter application for Trump-linked crypto firm</span>
+            <span class="text-crypto-gold">///</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                BREAKING: Justin Sun files federal lawsuit against World Liberty Financial — April 21, 2026
+            </span>
+            <span class="text-crypto-gold">///</span>
+            <span>WLFI tokens down 70%+ from highs</span>
+            <span class="text-crypto-gold">///</span>
+            <span>Senate investigating Trump crypto ventures</span>
+            <span class="text-crypto-gold">///</span>
+            <span>SEC fraud charges against Sun dropped after $75M WLFI investment</span>
+            <span class="text-crypto-gold">///</span>
+            <span>5B WLFI tokens pledged as collateral on Dolomite</span>
+            <span class="text-crypto-gold">///</span>
+            <span>UAE-linked fund with CNPC ties wired $100M to project</span>
+            <span class="text-crypto-gold">///</span>
+            <span>OCC reviewing bank charter application for Trump-linked crypto firm</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-10 left-0 right-0 z-40 bg-crypto-black/90 backdrop-blur-md border-b border-crypto-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-crypto-gold to-crypto-red rounded-lg flex items-center justify-center font-bold text-crypto-black text-sm">WL</div>
+                    <span class="font-mono font-bold text-sm tracking-wider text-gray-300">WLFI<span class="text-crypto-red">.EXPOSED</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                    <a href="#hook" class="nav-link text-gray-400 hover:text-white transition-colors">Hook</a>
+                    <a href="#what" class="nav-link text-gray-400 hover:text-white transition-colors">What is WLFI?</a>
+                    <a href="#blacklist" class="nav-link text-gray-400 hover:text-white transition-colors">Blacklist</a>
+                    <a href="#sun" class="nav-link text-gray-400 hover:text-white transition-colors">Justin Sun</a>
+                    <a href="#ftx" class="nav-link text-gray-400 hover:text-white transition-colors">FTX Parallel</a>
+                    <a href="#congress" class="nav-link text-gray-400 hover:text-white transition-colors">Congress</a>
+                    <a href="#evidence" class="nav-link text-gray-400 hover:text-white transition-colors">Evidence</a>
+                </div>
+                <button onclick="document.getElementById('sources').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 bg-crypto-red/20 border border-crypto-red/50 text-crypto-red text-xs font-mono font-bold rounded hover:bg-crypto-red/30 transition-colors">
+                    SOURCES
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Cold Open -->
+    <section id="hook" class="relative min-h-screen flex items-center justify-center pt-24 grid-bg">
+        <div class="absolute inset-0 bg-gradient-to-b from-crypto-black via-transparent to-crypto-black"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center section-hidden">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-crypto-red/10 border border-crypto-red/30 text-crypto-red text-xs font-mono font-bold tracking-wider mb-8">
+                <span class="w-2 h-2 bg-crypto-red rounded-full animate-pulse"></span>
+                FEDERAL LAWSUIT FILED APRIL 21, 2026
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-6">
+                <span class="gradient-text">THE WLFI</span><br>
+                <span class="text-white">SCANDAL</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-4">
+                Trump's Crypto Scam Hiding in Plain Sight
+            </p>
+
+            <div class="w-24 h-1 bg-gradient-to-r from-crypto-gold to-crypto-red mx-auto mb-12"></div>
+
+            <div class="glass-card rounded-2xl p-8 md:p-12 max-w-4xl mx-auto text-left receipt-pattern">
+                <p class="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
+                    <span class="text-crypto-gold font-semibold">What if I told you</span> the same playbook that took down Sam Bankman-Fried is being run again — but this time by the <span class="text-white font-semibold">President's family</span> — and it's all happening <span class="text-crypto-red font-semibold">on-chain where anyone can see it?</span>
+                </p>
+                <div class="mt-6 flex items-center gap-4 text-sm text-gray-500 font-mono">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        20+ MINUTE READ
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        7 SEGMENTS
+                    </span>
+                    <span class="flex items-center gap-2 text-crypto-red">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        LIVE DOCUMENT
+                    </span>
+                </div>
+            </div>
+
+            <div class="mt-12 flex justify-center">
+                <a href="#what" class="animate-bounce text-gray-500 hover:text-crypto-gold transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 2: What is WLFI? -->
+    <section id="what" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-hidden">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-gold font-mono text-sm font-bold">SEGMENT 01</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-12">What is <span class="gradient-text">WLFI?</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="section-hidden space-y-6">
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-crypto-gold font-mono text-sm font-bold mb-3 uppercase tracking-wider">The Structure</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            World Liberty Financial is structured so that <strong class="text-white">DT Marks DEFI LLC</strong> — the Trump family's designated revenue vehicle — receives <span class="text-crypto-gold font-bold">75% of net revenues</span>, while the legal wrapper specifically protects the Trump family from operational liability.<a href="https://cryptonews.com/news/world-liberty-financial-wlfi-ethics-corruption-allegations/" target="_blank" class="source-link">[36]</a>
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-crypto-gold font-mono text-sm font-bold mb-3 uppercase tracking-wider">The Extraction</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            The Trump family has extracted at least <span class="text-crypto-gold font-bold stat-number text-lg">$890 million</span> in revenues from WLFI while holding tokens valued at approximately <span class="text-crypto-gold font-bold stat-number text-lg">$3.8 billion</span>, with no documented personal capital investment at inception.<a href="https://www.odaily.news/en/post/5210386" target="_blank" class="source-link">[31]</a>
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-crypto-gold font-mono text-sm font-bold mb-3 uppercase tracking-wider">The Founders</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Co-founders include <strong class="text-white">Eric Trump</strong>, <strong class="text-white">Donald Trump Jr.</strong>, alongside partners <strong class="text-white">Zachary Folkman</strong>, <strong class="text-white">Chase Herro</strong>, and <strong class="text-white">Zach Witkoff</strong>.<a href="https://en.wikipedia.org/wiki/World_Liberty_Financial" target="_blank" class="source-link">[51]</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-hidden space-y-6">
+                    <div class="glass-card rounded-xl p-6 border-crypto-red/30">
+                        <h3 class="text-crypto-red font-mono text-sm font-bold mb-3 uppercase tracking-wider flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            The Bank Charter Gambit
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-4">
+                            On January 9, 2026, WLFI applied to the <strong class="text-white">OCC for a national trust bank charter</strong> under World Liberty Trust Company, with <strong class="text-white">Zach Witkoff listed as proposed president</strong> — meaning they want to become a federally regulated bank.<a href="https://www.bankingdive.com/news/trump-family-crypto-firm-seeks-bank-charter/809120/" target="_blank" class="source-link">[43]</a>
+                        </p>
+                        <div class="code-block p-4 text-gray-400">
+                            <span class="text-crypto-red">ALERT:</span> An entity affiliated with Trump owns ~38% of World Liberty's holding company. A UAE royal family-linked entity purchased 49%.<a href="https://www.reed.senate.gov/news/releases/reed-and-kim-demand-public-disclosure-of-world-liberty-financials-beneficial-owners" target="_blank" class="source-link">[47]</a>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="glass-card rounded-xl p-4 text-center">
+                            <div class="stat-number text-2xl text-crypto-gold">$890M+</div>
+                            <div class="text-xs text-gray-500 mt-1 font-mono">REVENUE EXTRACTED</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center">
+                            <div class="stat-number text-2xl text-crypto-gold">$3.8B</div>
+                            <div class="text-xs text-gray-500 mt-1 font-mono">TOKEN HOLDINGS VALUE</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center">
+                            <div class="stat-number text-2xl text-crypto-red">75%</div>
+                            <div class="text-xs text-gray-500 mt-1 font-mono">NET REVENUE SHARE</div>
+                        </div>
+                        <div class="glass-card rounded-xl p-4 text-center">
+                            <div class="stat-number text-2xl text-white">$0</div>
+                            <div class="text-xs text-gray-500 mt-1 font-mono">DOCUMENTED CAPITAL INVESTED</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 3: The Blacklist Bombshell -->
+    <section id="blacklist" class="py-24 bg-crypto-dark relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-crypto-red/5 rounded-full blur-3xl"></div>
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="section-hidden">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-red font-mono text-sm font-bold">SEGMENT 02</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">The <span class="gradient-text-red">Blacklist</span> Bombshell</h2>
+                <p class="text-gray-400 text-lg mb-12 max-w-2xl">The core accusation: a hidden kill switch embedded in the smart contract, allowing the seizure of any investor's assets without notice or vote.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6 mb-12">
+                <div class="lg:col-span-2 section-hidden">
+                    <div class="glass-card rounded-xl p-8 border-crypto-red/20 h-full">
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-crypto-red/20 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-crypto-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-2">The August 2025 Upgrade</h3>
+                                <p class="text-gray-400 text-sm">World Liberty changed the smart contract governing $WLFI to add a "blacklisting" function — without governance vote or disclosure.</p>
+                            </div>
+                        </div>
+
+                        <div class="highlight-red rounded-lg mb-6">
+                            <p class="text-gray-300 italic leading-relaxed">
+                                "While the upgrade is technically visible on the public blockchain, World Liberty buried it in the code without alerting token holders to its existence or implications. <span class="text-white font-semibold">In the dark of night, the company thus created a 'blacklisting' function that it could wield at will.</span>"
+                            </p>
+                            <p class="text-crypto-red text-xs font-mono mt-3">— FEDERAL COMPLAINT, APRIL 21, 2026<a href="https://www.coindesk.com/policy/2026/04/21/tron-s-justin-sun-sues-trump-linked-world-liberty-financial-over-frozen-assets" target="_blank" class="source-link">[2]</a></p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-crypto-red mt-2"></div>
+                                <p class="text-gray-300 text-sm">The modification was not put to a governance vote or disclosed to investors, even as token holders had just approved a proposal to make a portion of the supply tradable.<a href="https://www.coindesk.com/policy/2026/04/21/tron-s-justin-sun-sues-trump-linked-world-liberty-financial-over-frozen-assets" target="_blank" class="source-link">[2]</a></p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-crypto-red mt-2"></div>
+                                <p class="text-gray-300 text-sm">World Liberty's own risk disclosure documents explicitly state the company can block and freeze wallet addresses if it deems them linked to activities that violate project terms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-hidden space-y-6">
+                    <div class="glass-card rounded-xl p-6 border-crypto-amber/30">
+                        <h3 class="text-crypto-amber font-mono text-sm font-bold mb-4 uppercase tracking-wider">The Multisig</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Control Structure</span>
+                                <span class="text-crypto-amber font-mono font-bold">3-of-5</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Guardian Wallet</span>
+                                <span class="text-crypto-red font-mono font-bold">Anonymous</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Freeze Power</span>
+                                <span class="text-crypto-red font-mono font-bold">1 Signature</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Seizure Power</span>
+                                <span class="text-crypto-amber font-mono font-bold">3 Signatures</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-4 leading-relaxed">
+                            One person — one single individual — has the unilateral power to freeze any token holder's assets. Seizing those assets requires a 3-of-5 multisig vote, but freezing requires only one signature.<a href="https://cryptorank.io/news/feed/1dd89-world-liberty-financial-token-holder-legal-action-loses-700m-token-scandal" target="_blank" class="source-link">[35]</a>
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-white font-mono text-sm font-bold mb-3 uppercase tracking-wider">The Admission</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            They admitted it in the fine print. The risk disclosure explicitly states the company can block and freeze wallet addresses and associated tokens.
+                        </p>
+                        <div class="mt-3 p-3 bg-crypto-red/10 rounded border border-crypto-red/20">
+                            <p class="text-crypto-red text-xs font-mono">This is not DeFi. This is a centralized bank with no regulations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 4: Justin Sun's Story -->
+    <section id="sun" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-hidden mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-gold font-mono text-sm font-bold">SEGMENT 03</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Justin Sun's <span class="gradient-text">Story</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl">From largest investor to frozen victim — a timeline of betrayal.</p>
+            </div>
+
+            <div class="relative section-hidden">
+                <div class="timeline-line"></div>
+
+                <div class="space-y-12">
+                    <!-- Event 1 -->
+                    <div class="relative pl-16">
+                        <div class="absolute left-0 top-0 w-12 h-12 rounded-full bg-crypto-gold/20 border-2 border-crypto-gold flex items-center justify-center">
+                            <span class="text-crypto-gold font-mono font-bold text-xs">01</span>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-crypto-gold font-mono text-xs font-bold">LATE 2024</span>
+                                <div class="h-px flex-1 bg-crypto-border"></div>
+                            </div>
+                            <h3 class="text-white font-bold text-lg mb-2">The $45 Million Investment</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Sun invested <span class="text-crypto-gold font-bold">$45 million</span> in WLFI based partly on the Trump family's association with the project. He was subsequently named an official advisor.<a href="https://finance.yahoo.com/news/justin-sun-launches-legal-battle-045704416.html" target="_blank" class="source-link">[7]</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="relative pl-16">
+                        <div class="absolute left-0 top-0 w-12 h-12 rounded-full bg-crypto-amber/20 border-2 border-crypto-amber flex items-center justify-center">
+                            <span class="text-crypto-amber font-mono font-bold text-xs">02</span>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-crypto-amber font-mono text-xs font-bold">SEPTEMBER 2025</span>
+                                <div class="h-px flex-1 bg-crypto-border"></div>
+                            </div>
+                            <h3 class="text-white font-bold text-lg mb-2">The Freeze</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                WLFI used the embedded smart contract blacklist to lock Sun's wallet after he transferred approximately <span class="text-crypto-amber font-bold">$9 million</span> worth of tokens — which Sun says were routine test deposits. His frozen position was worth over <span class="text-crypto-amber font-bold">$100 million</span> at the time.<a href="https://finance.yahoo.com/news/justin-sun-launches-legal-battle-045704416.html" target="_blank" class="source-link">[7]</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="relative pl-16">
+                        <div class="absolute left-0 top-0 w-12 h-12 rounded-full bg-crypto-red/20 border-2 border-crypto-red flex items-center justify-center">
+                            <span class="text-crypto-red font-mono font-bold text-xs">03</span>
+                        </div>
+                        <div class="glass-card rounded-xl p-6 border-crypto-red/20">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-crypto-red font-mono text-xs font-bold">FALL 2025 – WINTER 2026</span>
+                                <div class="h-px flex-1 bg-crypto-border"></div>
+                            </div>
+                            <h3 class="text-white font-bold text-lg mb-2">The Extortion Attempts</h3>
+                            <p class="text-gray-300 leading-relaxed mb-4">
+                                Sun alleges WLFI attempted to extort him into minting <span class="text-crypto-red font-bold">$200 million</span> in USD1, threatened to permanently burn his holdings, and accused him of submitting inadequate KYC documents as leverage.<a href="https://www.wsj.com/finance/currencies/crypto-billionaire-accuses-trump-familys-world-liberty-of-criminal-extortion-14a82769" target="_blank" class="source-link">[21]</a>
+                            </p>
+                            <div class="highlight-red rounded-lg">
+                                <p class="text-gray-300 text-sm italic">
+                                    "They wrongfully froze all of my tokens, stripped me of my right to vote on governance proposals, and have threatened to permanently destroy my tokens — all without any proper justification."
+                                </p>
+                                <p class="text-crypto-red text-xs font-mono mt-2">— JUSTIN SUN, APRIL 2026<a href="https://finance.yahoo.com/news/justin-sun-launches-legal-battle-045704416.html" target="_blank" class="source-link">[7]</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Event 4 -->
+                    <div class="relative pl-16">
+                        <div class="absolute left-0 top-0 w-12 h-12 rounded-full bg-white/20 border-2 border-white flex items-center justify-center animate-pulse">
+                            <span class="text-white font-mono font-bold text-xs">04</span>
+                        </div>
+                        <div class="glass-card rounded-xl p-6 border-white/20 bg-white/5">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-white font-mono text-xs font-bold">APRIL 21, 2026</span>
+                                <div class="h-px flex-1 bg-crypto-border"></div>
+                            </div>
+                            <h3 class="text-white font-bold text-lg mb-2">The Federal Lawsuit</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Sun filed a federal lawsuit in California, stating WLFI is <span class="text-white font-bold">"engaging in an illegal scheme to seize property."</span> The complaint alleges fraudulent misrepresentations, extortion, and defamation.<a href="https://thehill.com/business/personal-finance/5842927-justin-sun-sues-trump-crypto/" target="_blank" class="source-link">[11]</a>
+                            </p>
+                            <div class="mt-4 grid grid-cols-2 gap-4">
+                                <div class="p-3 bg-crypto-black/50 rounded-lg text-center">
+                                    <div class="stat-number text-xl text-crypto-red">$80M+</div>
+                                    <div class="text-xs text-gray-500 mt-1">UNREALIZED LOSSES</div>
+                                </div>
+                                <div class="p-3 bg-crypto-black/50 rounded-lg text-center">
+                                    <div class="stat-number text-xl text-white">545M</div>
+                                    <div class="text-xs text-gray-500 mt-1">FROZEN WLFI TOKENS<a href="https://www.nbcnews.com/business/business-news/trump-crypto-world-liberty-justin-sun-rcna331555" target="_blank" class="source-link">[8]</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 5: The FTX Parallel -->
+    <section id="ftx" class="py-24 bg-crypto-dark relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-crypto-amber/5 rounded-full blur-3xl"></div>
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="section-hidden mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-amber font-mono text-sm font-bold">SEGMENT 04</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">The <span class="text-crypto-amber">FTX</span> Parallel</h2>
+                <p class="text-gray-400 text-lg max-w-2xl">Same playbook, different players — but this time, the blockchain is watching.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-12">
+                <div class="section-hidden">
+                    <div class="glass-card rounded-xl p-8 h-full">
+                        <h3 class="text-white font-bold text-xl mb-6 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded bg-crypto-amber/20 flex items-center justify-center text-crypto-amber text-sm">1</span>
+                            The Circular Borrow
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            World Liberty Financial's treasury wallet routed roughly <span class="text-crypto-amber font-bold">5 billion WLFI tokens</span> to a crypto lending protocol called <strong class="text-white">Dolomite</strong> and borrowed about <span class="text-crypto-amber font-bold">$75 million</span> in stablecoins — including <span class="text-crypto-amber font-bold">$65.4 million</span> of its own USD1.<a href="https://unchainedcrypto.com/world-liberty-financial-borrows-75-million-against-its-own-token-on-a-protocol-its-advisor-co-founded-unchained/" target="_blank" class="source-link">[33]</a>
+                        </p>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between items-center p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Collateral</span>
+                                <span class="text-crypto-amber font-mono font-bold">5B WLFI</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Borrowed (USD1)</span>
+                                <span class="text-crypto-amber font-mono font-bold">$65.4M</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Borrowed (USDC)</span>
+                                <span class="text-crypto-amber font-mono font-bold">$10.3M</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-crypto-black/50 rounded-lg">
+                                <span class="text-gray-400 text-sm">Destination</span>
+                                <span class="text-crypto-red font-mono font-bold">Coinbase Prime<a href="https://www.coindesk.com/markets/2026/04/09/trump-s-world-liberty-financial-borrows-usd75-million-against-its-own-token-trapping-depositors-on-dolomite" target="_blank" class="source-link">[34]</a></span>
+                            </div>
+                        </div>
+
+                        <div class="highlight-gold rounded-lg">
+                            <p class="text-gray-300 text-sm">
+                                <strong class="text-crypto-amber">The Conflict:</strong> Dolomite co-founder <strong class="text-white">Corey Caplan</strong> has served as an adviser to World Liberty Financial since shortly after its launch and has since been described as the company's chief technology officer — meaning the borrower and the infrastructure are linked, the same circle on both sides of the trade.<a href="https://www.citationneeded.news/issue-104/" target="_blank" class="source-link">[9]</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-hidden space-y-6">
+                    <div class="glass-card rounded-xl p-6 border-crypto-red/20">
+                        <h3 class="text-crypto-red font-bold text-lg mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            The Liquidation Risk
+                        </h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            WLFI tokens are already down more than <span class="text-crypto-red font-bold">70%</span>. If the loan is liquidated, it would flood the market with tokens, crushing the price further and leaving everyday investors holding the losses.<a href="https://yellow.com/research/world-liberty-financial-ftx-blockchain" target="_blank" class="source-link">[14]</a>
+                        </p>
+                        <div class="p-4 bg-crypto-red/10 rounded-lg border border-crypto-red/20">
+                            <p class="text-crypto-red text-sm font-mono">
+                                "We'd simply supply more collateral. That's not a risk. That's how this works."
+                            </p>
+                            <p class="text-gray-500 text-xs mt-2">— WLFI OFFICIAL RESPONSE</p>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-3">
+                            Critics pointed out that this offer only deepens the circular risk — adding more WLFI tokens to a position already backed by WLFI, on a platform run by a WLFI insider, denominated in WLFI's own stablecoin.<a href="https://yellow.com/research/world-liberty-financial-ftx-blockchain" target="_blank" class="source-link">[14]</a>
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-white font-bold text-lg mb-4">FTX vs. WLFI: The Comparison</h3>
+                        <div class="overflow-hidden rounded-lg border border-crypto-border">
+                            <div class="grid grid-cols-3 gap-4 p-3 bg-crypto-black/50 text-xs font-mono text-gray-500 border-b border-crypto-border">
+                                <div>MECHANIC</div>
+                                <div class="text-crypto-red">FTX / ALAMEDA</div>
+                                <div class="text-crypto-amber">WLFI / DOLOMITE</div>
+                            </div>
+                            <div class="comparison-row grid grid-cols-3 gap-4 p-3 border-b border-crypto-border text-sm">
+                                <div class="text-gray-400">Collateral</div>
+                                <div class="text-gray-300">FTT Token</div>
+                                <div class="text-crypto-amber font-semibold">WLFI Token</div>
+                            </div>
+                            <div class="comparison-row grid grid-cols-3 gap-4 p-3 border-b border-crypto-border text-sm">
+                                <div class="text-gray-400">Lending Platform</div>
+                                <div class="text-gray-300">FTX Exchange</div>
+                                <div class="text-crypto-amber font-semibold">Dolomite</div>
+                            </div>
+                            <div class="comparison-row grid grid-cols-3 gap-4 p-3 border-b border-crypto-border text-sm">
+                                <div class="text-gray-400">Insider Link</div>
+                                <div class="text-gray-300">SBF / Caroline</div>
+                                <div class="text-crypto-amber font-semibold">Caplan / Witkoff</div>
+                            </div>
+                            <div class="comparison-row grid grid-cols-3 gap-4 p-3 border-b border-crypto-border text-sm">
+                                <div class="text-gray-400">Visibility</div>
+                                <div class="text-crypto-red">Hidden</div>
+                                <div class="text-green-400 font-semibold">On-Chain Public</div>
+                            </div>
+                            <div class="comparison-row grid grid-cols-3 gap-4 p-3 text-sm">
+                                <div class="text-gray-400">Regulatory Shield</div>
+                                <div class="text-gray-300">None</div>
+                                <div class="text-crypto-amber font-semibold">OCC Bank Charter?</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-3">
+                            The key difference: FTX's arrangement was concealed, while WLFI's entire position sits on-chain for anyone to see. The risk is not hidden — it is simply being dismissed.<a href="https://yellow.com/research/world-liberty-financial-ftx-blockchain" target="_blank" class="source-link">[14]</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 6: Congress Is Watching -->
+    <section id="congress" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-hidden mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-gold font-mono text-sm font-bold">SEGMENT 05</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Congress Is <span class="gradient-text">Watching</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl">Institutional legitimacy for the investigation — the Senate has entered the chat.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-hidden">
+                    <div class="glass-card rounded-xl p-8 border-crypto-gold/20 h-full">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-crypto-gold/20 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-crypto-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Senate Investigation</h3>
+                                <p class="text-crypto-gold font-mono text-sm">PERMANENT SUBCOMMITTEE ON INVESTIGATIONS</p>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Senator <strong class="text-white">Richard Blumenthal</strong>, Ranking Member of the U.S. Senate Permanent Subcommittee on Investigations, opened a preliminary inquiry into WLFI and other Trump cryptocurrency ventures, citing potential conflicts of interest, transactions with foreign nationals, investments from foreign governments, and potential violations of federal law.<a href="https://www.yahoo.com/news/articles/senator-questions-sec-over-treatment-232852642.html" target="_blank" class="source-link">[10]</a>
+                        </p>
+
+                        <div class="highlight-gold rounded-lg mb-6">
+                            <p class="text-gray-300 text-sm italic">
+                                "This is a clear example of how President Trump's blatant crypto corruption creates back doors for his family's business partners, creating a pay-to-play enforcement regime that turns a blind eye to grave threats to national security and consumer protection."
+                            </p>
+                            <p class="text-crypto-gold text-xs font-mono mt-2">— SEN. RICHARD BLUMENTHAL<a href="https://www.blumenthal.senate.gov/newsroom/press/release/blumenthal-demands-answers-from-sec-chairman-over-preferential-treatment-of-trump-crypto-backers" target="_blank" class="source-link">[12]</a></p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-crypto-gold mt-2"></div>
+                                <p class="text-gray-400 text-sm">Demanded records on SEC communications with Trump family and Witkoff family regarding WLFI and $TRUMP token.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-crypto-gold mt-2"></div>
+                                <p class="text-gray-400 text-sm">Questioned the departure of Margaret Ryan, SEC Enforcement Director, who left just 11 days after Sun's charges were dismissed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-hidden space-y-6">
+                    <div class="glass-card rounded-xl p-6 border-crypto-red/20">
+                        <h3 class="text-crypto-red font-bold text-lg mb-4">The SEC Timeline</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+                                    <div class="w-0.5 h-full bg-gray-700"></div>
+                                </div>
+                                <div class="pb-4">
+                                    <p class="text-gray-500 text-xs font-mono">MARCH 2023</p>
+                                    <p class="text-gray-300 text-sm">SEC charges Sun with fraud, market manipulation, and wash trading.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-3 h-3 rounded-full bg-crypto-gold"></div>
+                                    <div class="w-0.5 h-full bg-gray-700"></div>
+                                </div>
+                                <div class="pb-4">
+                                    <p class="text-gray-500 text-xs font-mono">LATE 2024 – EARLY 2025</p>
+                                    <p class="text-gray-300 text-sm">Sun invests $75M in WLFI and becomes largest $TRUMP memecoin holder, earning dinner with the President.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-3 h-3 rounded-full bg-crypto-red animate-pulse"></div>
+                                    <div class="w-0.5 h-full bg-gray-700"></div>
+                                </div>
+                                <div class="pb-4">
+                                    <p class="text-gray-500 text-xs font-mono">MARCH 5, 2026</p>
+                                    <p class="text-gray-300 text-sm">SEC dismisses fraud charges against Sun after $10M civil penalty. Enforcement Director Margaret Ryan departs 11 days later.<a href="https://www.blumenthal.senate.gov/newsroom/press/release/blumenthal-demands-answers-from-sec-chairman-over-preferential-treatment-of-trump-crypto-backers" target="_blank" class="source-link">[12]</a></p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-3 h-3 rounded-full bg-white"></div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 text-xs font-mono">APRIL 21, 2026</p>
+                                    <p class="text-gray-300 text-sm">Sun files federal lawsuit against WLFI.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-white font-bold text-lg mb-3">WLFI's Response</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            WLFI responded to Blumenthal's inquiry by saying they were <span class="text-white font-semibold">"too busy building"</span> for oversight, with lawyers calling the probe <span class="text-white font-semibold">"fundamentally flawed."</span><a href="https://www.citationneeded.news/issue-104/" target="_blank" class="source-link">[9]</a>
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-crypto-red/10 rounded-lg border border-crypto-red/20">
+                        <p class="text-crypto-red text-sm font-mono text-center font-bold">
+                            "See you in court pal."<br>
+                            <span class="text-gray-500 text-xs font-normal">— WLFI OFFICIAL X ACCOUNT, RESPONDING TO SUN</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segment 7: Close / The Take -->
+    <section class="py-24 bg-crypto-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-crypto-black to-transparent"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="section-hidden text-center mb-12">
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <div class="h-px w-12 bg-crypto-border"></div>
+                    <span class="text-crypto-red font-mono text-sm font-bold">THE TAKE</span>
+                    <div class="h-px w-12 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black text-white mb-6">This Is Not <span class="gradient-text-red">Decentralized Finance</span></h2>
+            </div>
+
+            <div class="space-y-6 section-hidden">
+                <div class="glass-card rounded-xl p-8 border-l-4 border-crypto-red">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-crypto-red/20 flex items-center justify-center flex-shrink-0 text-crypto-red font-bold">1</div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg mb-2">Centralized Control, Zero Regulation</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                When 3 anonymous wallets control a blacklist that can seize your tokens without a vote, without notice, and without recourse, that's a <span class="text-crypto-red font-bold">centralized bank with no regulations</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-8 border-l-4 border-crypto-amber">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-crypto-amber/20 flex items-center justify-center flex-shrink-0 text-crypto-amber font-bold">2</div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg mb-2">The FTX Comparison Is Real</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                The structure is nearly identical, except <span class="text-crypto-amber font-bold">SBF is in prison</span> and this operation has Secret Service protection.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl p-8 border-l-4 border-crypto-gold">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-crypto-gold/20 flex items-center justify-center flex-shrink-0 text-crypto-gold font-bold">3</div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg mb-2">The Foreign Angle Is the Buried Lede</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                A UAE-based entity linked to entities with ties to <strong class="text-white">China's state-owned CNPC</strong> wired $100 million in stablecoins to the project, with Reuters reporting the origins and expectations attached to that transfer remain opaque.<a href="https://finance.yahoo.com/news/uae-fund-buys-100-million-125051978.html" target="_blank" class="source-link">[54]</a>
+                            </p>
+                            <div class="mt-3 p-3 bg-crypto-black/50 rounded text-xs text-gray-500">
+                                Aqua 1 Foundation co-founder Dave Lee was identified by The Nation as David Li, a manager at Chinese National Petroleum Corporation (CNPC) Beijing.<a href="https://coingeek.com/champagne-on-ice-as-america-crypto-week-gets-underway/" target="_blank" class="source-link">[48]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-hidden mt-12 text-center">
+                <div class="glass-card rounded-2xl p-8 md:p-12 border-crypto-gold/30 receipt-pattern">
+                    <p class="text-xl md:text-2xl text-white font-light leading-relaxed mb-6">
+                        <span class="text-crypto-gold font-semibold">"If this was any other crypto project, the SEC would have shut it down.</span> So why hasn't it? And what does it say about where we are as a country that the President's family can run this in broad daylight?"
+                    </p>
+                    <div class="w-16 h-1 bg-gradient-to-r from-crypto-gold to-crypto-red mx-auto"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- On-Chain Evidence / Sources -->
+    <section id="evidence" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="section-hidden mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-crypto-gold font-mono text-sm font-bold">EVIDENCE LOCKER</span>
+                    <div class="h-px flex-1 bg-crypto-border"></div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">On-Chain <span class="gradient-text">Receipts</span></h2>
+                <p class="text-gray-400 text-lg">The beauty of blockchain: everything is verifiable. Here are the primary sources.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-16">
+                <a href="https://intel.arkhamintelligence.com/" target="_blank" class="evidence-card glass-card rounded-xl p-6 block">
+                    <div class="w-12 h-12 rounded-lg bg-crypto-gold/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-crypto-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.553-.894L15 7m0 13V7"></path></svg>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Arkham Intelligence</h3>
+                    <p class="text-gray-400 text-sm mb-4">Search the WLFI treasury wallet. Shows the Dolomite loan transactions and Coinbase Prime flows.</p>
+                    <div class="flex items-center gap-2 text-crypto-gold text-xs font-mono">
+                        <span>OPEN ARKHAM</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </div>
+                </a>
+
+                <a href="https://etherscan.io/" target="_blank" class="evidence-card glass-card rounded-xl p-6 block">
+                    <div class="w-12 h-12 rounded-lg bg-crypto-amber/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-crypto-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Etherscan</h3>
+                    <p class="text-gray-400 text-sm mb-4">Pull the WLFI token contract directly. Look for the `blacklist` function added August 2025.</p>
+                    <div class="flex items-center gap-2 text-crypto-amber text-xs font-mono">
+                        <span>OPEN ETHERSCAN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </div>
+                </a>
+
+                <a href="https://bubblemaps.io/" target="_blank" class="evidence-card glass-card rounded-xl p-6 block">
+                    <div class="w-12 h-12 rounded-lg bg-crypto-red/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-crypto-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Bubblemaps</h3>
+                    <p class="text-gray-400 text-sm mb-4">Data confirms Sun's frozen holdings total roughly 545 million WLFI tokens.</p>
+                    <div class="flex items-center gap-2 text-crypto-red text-xs font-mono">
+                        <span>OPEN BUBBLEMAPS</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Sources Bibliography -->
+            <div id="sources" class="section-hidden">
+                <div class="glass-card rounded-xl p-8 md:p-12">
+                    <h3 class="text-white font-bold text-2xl mb-8 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-crypto-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Sources & Citations
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div class="space-y-3">
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[2]</span> <a href="https://www.coindesk.com/policy/2026/04/21/tron-s-justin-sun-sues-trump-linked-world-liberty-financial-over-frozen-assets" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">CoinDesk</a> — "Tron's Justin Sun sues Trump-linked World Liberty Financial over frozen assets" (April 22, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[7]</span> <a href="https://finance.yahoo.com/news/justin-sun-launches-legal-battle-045704416.html" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Yahoo Finance / BeInCrypto</a> — "Justin Sun Launches Legal Battle Against World Liberty Financial" (April 22, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[8]</span> <a href="https://www.nbcnews.com/business/business-news/trump-crypto-world-liberty-justin-sun-rcna331555" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">NBC News</a> — "Trump family's crypto company under fire from major investor" (April 14, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[9]</span> <a href="https://www.citationneeded.news/issue-104/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Citation Needed</a> — "Issue 104 – World Tyranny Financial" (April 21, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[10]</span> <a href="https://www.yahoo.com/news/articles/senator-questions-sec-over-treatment-232852642.html" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Yahoo News</a> — "Senator Questions SEC Over Treatment of Trump-Linked Crypto Businesses" (March 30, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[11]</span> <a href="https://thehill.com/business/personal-finance/5842927-justin-sun-sues-trump-crypto/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">The Hill</a> — "Billionaire investor sues Trump crypto project" (April 22, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[12]</span> <a href="https://www.blumenthal.senate.gov/newsroom/press/release/blumenthal-demands-answers-from-sec-chairman-over-preferential-treatment-of-trump-crypto-backers" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Sen. Blumenthal Press Release</a> — "Demands Answers from SEC Chairman over Preferential Treatment" (March 30, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[14]</span> <a href="https://yellow.com/research/world-liberty-financial-ftx-blockchain" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Yellow.com Research</a> — "World Liberty Financial Is Doing What FTX Did But This Time, The Blockchain Is Watching" (April 11, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[16]</span> <a href="https://www.bbc.co.uk/news/articles/c8x7kxjgq9xo" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">BBC</a> — "Trump family crypto firm sued over alleged 'extortion'" (April 23, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[18]</span> <a href="https://www.nytimes.com/2026/04/22/technology/justin-sun-crypto-world-liberty-trump.html" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">The New York Times</a> — "Crypto Entrepreneur Files Fraud Suit Against Trump Family Firm" (April 22, 2026)</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[21]</span> <a href="https://www.wsj.com/finance/currencies/crypto-billionaire-accuses-trump-familys-world-liberty-of-criminal-extortion-14a82769" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">The Wall Street Journal</a> — "Crypto Billionaire Accuses Trump Family's World Liberty of 'Criminal Extortion'" (April 22, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[31]</span> <a href="https://www.odaily.news/en/post/5210386" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Odaily</a> — "The Real WLFI Behind Satirical Literature" (April 22, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[33]</span> <a href="https://unchainedcrypto.com/world-liberty-financial-borrows-75-million-against-its-own-token-on-a-protocol-its-advisor-co-founded-unchained/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Unchained Crypto</a> — "World Liberty Financial Borrows $75 Million Against Its Own Token" (April 10, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[34]</span> <a href="https://www.coindesk.com/markets/2026/04/09/trump-s-world-liberty-financial-borrows-usd75-million-against-its-own-token-trapping-depositors-on-dolomite" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">CoinDesk</a> — "Trump's World Liberty Financial uses 5 billion WLFI to borrow $75 million" (April 9, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[35]</span> <a href="https://cryptorank.io/news/feed/1dd89-world-liberty-financial-token-holder-legal-action-loses-700m-token-scandal" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">CryptoRank</a> — "World Liberty Financial threatens top token holder with legal action" (April 13, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[36]</span> <a href="https://cryptonews.com/news/world-liberty-financial-wlfi-ethics-corruption-allegations/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">CryptoNews</a> — "World Liberty Financial Under Ethics Fire" (April 3, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[37]</span> <a href="https://www.forbes.com/sites/digital-assets/2026/04/10/dont-be-exit-liquidity-trumps-wlfi-borrows-75m-on-own-token/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Forbes</a> — "Trump Crypto Project Borrows $75M On Own Platform" (April 10, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[43]</span> <a href="https://www.bankingdive.com/news/trump-family-crypto-firm-seeks-bank-charter/809120/" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Banking Dive</a> — "Trump family's crypto firm seeks bank charter" (January 8, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[47]</span> <a href="https://www.reed.senate.gov/news/releases/reed-and-kim-demand-public-disclosure-of-world-liberty-financials-beneficial-owners" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Sen. Reed / Sen. Kim</a> — "Demand Public Disclosure of Beneficial Owners" (February 27, 2026)</p>
+                            </div>
+                            <div class="p-3 bg-crypto-black/50 rounded-lg">
+                                <p class="text-gray-400"><span class="text-crypto-gold font-mono">[54]</span> <a href="https://finance.yahoo.com/news/uae-fund-buys-100-million-125051978.html" target="_blank" class="text-gray-300 hover:text-white underline decoration-crypto-border">Reuters / Yahoo Finance</a> — "UAE fund buys $100 million of Trump's World Liberty tokens" (June 27, 2025)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-crypto-border text-center">
+                        <p class="text-gray-500 text-sm">Additional sources include: Politico [41], BusinessWire [45], NCRC [44], CoinGeek [48], Wikipedia [51], House Oversight Democrats [25], One Bull [22], The Nation [48].</p>
+                        <p class="text-gray-600 text-xs mt-2">This is a living document. Last updated April 22, 2026.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-crypto-border bg-crypto-black">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-crypto-gold to-crypto-red rounded-lg flex items-center justify-center font-bold text-crypto-black text-sm">WL</div>
+                <span class="font-mono font-bold text-sm tracking-wider text-gray-500">WLFI.EXPOSED</span>
+            </div>
+            <p class="text-gray-600 text-sm max-w-xl mx-auto">
+                A presentation of publicly available information, on-chain data, and federal court filings. All claims are sourced from major media outlets and official government documents.
+            </p>
+            <p class="text-gray-700 text-xs mt-4 font-mono">Built for presentation purposes. Verify everything.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                    entry.target.classList.remove('section-hidden');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-hidden').forEach((el) => observer.observe(el));
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
