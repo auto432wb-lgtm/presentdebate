@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>They Banned the Digital Dollar… So They Built This Instead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0a0a08;
+    --surface: #111110;
+    --border: #2a2a26;
+    --text: #e8e6de;
+    --muted: #6b6960;
+    --accent: #d4f000;
+    --accent2: #ff3c00;
+    --accent3: #00c8ff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --mono: 'Space Mono', monospace;
+    --body: 'Crimson Pro', Georgia, serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,8,0.98), transparent);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 10vw 80px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 7vw, 96px);
+    font-weight: 900;
+    line-height: 1.0;
+    max-width: 900px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+
+  .hero-title .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero-title .strike {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+    color: var(--muted);
+    max-width: 560px;
+    font-style: italic;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+
+  .hero-meta {
+    margin-top: 60px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-stat {
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .hero-stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* BIG BACKGROUND TEXT */
+  .hero-bg-text {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: clamp(120px, 18vw, 260px);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(212, 240, 0, 0.06);
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--accent);
+    overflow: hidden;
+    padding: 10px 0;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-inner span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bg);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 40px;
+  }
+
+  .ticker-inner span::after {
+    content: '◆';
+    margin-left: 40px;
+    opacity: 0.4;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 100px 10vw;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .section-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-body {
+    max-width: 680px;
+    font-size: 20px;
+    line-height: 1.75;
+    color: #c8c6be;
+  }
+
+  .section-body p { margin-bottom: 20px; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 40px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .callout.red { border-left-color: var(--accent2); }
+  .callout.blue { border-left-color: var(--accent3); }
+
+  .callout-label {
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .callout.red .callout-label { color: var(--accent2); }
+  .callout.blue .callout-label { color: var(--accent3); }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    margin: 60px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 600px;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+
+  .flow-step.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .flow-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    min-width: 60px;
+    opacity: 0.3;
+  }
+
+  .flow-text {
+    padding-top: 8px;
+  }
+
+  .flow-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .flow-desc {
+    font-family: var(--body);
+    font-size: 19px;
+    color: var(--text);
+  }
+
+  .flow-desc strong {
+    color: var(--accent);
+  }
+
+  .flow-arrow {
+    text-align: center;
+    color: var(--accent);
+    font-size: 20px;
+    padding: 4px 0;
+    margin-left: 30px;
+  }
+
+  /* WHO WINS TABLE */
+  .winners-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 48px 0;
+    max-width: 800px;
+    background: var(--border);
+  }
+
+  .winners-col {
+    background: var(--surface);
+    padding: 32px;
+  }
+
+  .winners-col-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .winners-col.win .winners-col-label { color: var(--accent); }
+  .winners-col.lose .winners-col-label { color: var(--accent2); }
+
+  .winner-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    color: #c8c6be;
+  }
+
+  .winner-item .icon {
+    font-size: 20px;
+    min-width: 28px;
+    margin-top: 2px;
+  }
+
+  .winner-item strong {
+    display: block;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    max-width: 900px;
+    margin: 48px 0;
+  }
+
+  .compare-cell {
+    background: var(--surface);
+    padding: 24px 28px;
+    font-size: 15px;
+  }
+
+  .compare-cell.header {
+    background: var(--bg);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .compare-cell.header.cbdc { color: var(--accent2); }
+  .compare-cell.header.stable { color: var(--accent3); }
+
+  .compare-cell .check { color: var(--accent); margin-right: 8px; }
+  .compare-cell .cross { color: var(--accent2); margin-right: 8px; }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    margin: 80px 0;
+    padding: 48px 60px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    max-width: 800px;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 160px;
+    color: var(--accent);
+    opacity: 0.15;
+    position: absolute;
+    top: -30px;
+    left: 30px;
+    line-height: 1;
+  }
+
+  .pull-quote-text {
+    font-family: var(--serif);
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+
+  .pull-quote-attr {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 60px 0;
+    max-width: 680px;
+  }
+
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-icon { color: var(--accent); font-size: 14px; }
+
+  /* OUTRO */
+  .outro {
+    padding: 120px 10vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .outro-tagline {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .outro-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.05;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  .outro-title .strike {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  .outro-title .accent { color: var(--accent); font-style: italic; }
+
+  .outro-sub {
+    font-family: var(--body);
+    font-size: 20px;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .outro-badge {
+    display: inline-block;
+    margin-top: 60px;
+    border: 1px solid var(--accent);
+    padding: 12px 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .outro-bg {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--serif);
+    font-size: clamp(80px, 15vw, 200px);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(212, 240, 0, 0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* SIDE LABEL */
+  .section-aside {
+    position: absolute;
+    right: 10vw;
+    top: 100px;
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--border);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+
+  /* REDACTED EFFECT */
+  .redacted {
+    background: var(--accent2);
+    color: transparent;
+    user-select: none;
+    padding: 0 4px;
+  }
+
+  /* INLINE HIGHLIGHT */
+  mark {
+    background: rgba(212, 240, 0, 0.12);
+    color: var(--accent);
+    padding: 1px 4px;
+    font-style: normal;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 6vw 60px; }
+    .section { padding: 80px 6vw; }
+    .section-aside { display: none; }
+    .hero-bg-text { opacity: 0.5; font-size: 100px; right: -40px; }
+    .winners-table { grid-template-columns: 1fr; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-cell.header:first-child { display: none; }
+    .pull-quote { padding: 32px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .outro { padding: 80px 6vw; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <div class="nav-logo">GENIUS ACT // ANALYSIS</div>
+  <ul class="nav-links">
+    <li><a href="#cbdc">CBDC Ban</a></li>
+    <li><a href="#genius">The Act</a></li>
+    <li><a href="#money">Follow $</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#verdict">Verdict</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">GENIUS</div>
+
+  <div class="hero-eyebrow">SPECIAL REPORT &nbsp;/&nbsp; 2025 &nbsp;/&nbsp; U.S. MONETARY POLICY</div>
+
+  <h1 class="hero-title">
+    They Banned the<br>
+    <span class="highlight">Digital Dollar…</span><br>
+    So They Built<br>
+    <em>This Instead</em>
+  </h1>
+
+  <p class="hero-subtitle">
+    The CBDC ban was real. What replaced it was more private — 
+    but no less controlled. And the profits? They're not going to you.
+  </p>
+
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <div class="hero-stat-num">1:1</div>
+      <div class="hero-stat-label">Reserve Backing Ratio</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Interest Paid to Users</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4–5%</div>
+      <div class="hero-stat-label">Yield Kept by Issuers</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>CBDC BANNED</span>
+    <span>STABLECOINS APPROVED</span>
+    <span>NO YIELD FOR HOLDERS</span>
+    <span>TREASURIES FUNDED</span>
+    <span>GENIUS ACT PASSED 2025</span>
+    <span>DOLLAR DOMINANCE EXTENDED</span>
+    <span>PRIVATE PROFIT, PUBLIC BACKING</span>
+    <span>NOT A CBDC… BUT CLOSE ENOUGH</span>
+    <span>CBDC BANNED</span>
+    <span>STABLECOINS APPROVED</span>
+    <span>NO YIELD FOR HOLDERS</span>
+    <span>TREASURIES FUNDED</span>
+    <span>GENIUS ACT PASSED 2025</span>
+    <span>DOLLAR DOMINANCE EXTENDED</span>
+    <span>PRIVATE PROFIT, PUBLIC BACKING</span>
+    <span>NOT A CBDC… BUT CLOSE ENOUGH</span>
+  </div>
+</div>
+
+<!-- SECTION 1: CBDC BAN -->
+<section class="section" id="cbdc">
+  <div class="section-aside">PART I / CBDC BAN</div>
+
+  <div class="section-number reveal">PART 01 &nbsp;/&nbsp; THE SETUP</div>
+  <h2 class="section-title reveal">The Government Said <em>No</em><br>to a Digital Dollar</h2>
+
+  <div class="section-body">
+    <p class="reveal">
+      The headline was clean: The U.S. government banned development of a Central Bank Digital Currency.
+      No CBDC. Full stop. The official reasoning leaned into civil liberties —
+      <mark>privacy concerns, fear of government surveillance, too much centralized control over money.</mark>
+    </p>
+    <p class="reveal">
+      Politically, that message landed. "We don't want the government tracking every transaction." 
+      Sounds like freedom. Sounds principled.
+    </p>
+  </div>
+
+  <div class="callout reveal">
+    <span class="callout-label">The Twist</span>
+    At the exact same time the CBDC ban was signed…
+    the government explicitly endorsed private, dollar-backed stablecoins as the future of digital money.<br><br>
+    So instead of:<br>
+    &nbsp;&nbsp;Government → issuing digital dollars<br><br>
+    We now have:<br>
+    &nbsp;&nbsp;Private companies → issuing digital dollars<br>
+    &nbsp;&nbsp;Backed by… the government.<br><br>
+    That's not removing control. <strong>That's outsourcing it.</strong>
+  </div>
+
+  <div class="section-body">
+    <p class="reveal">
+      The ban on a CBDC didn't kill the concept of a digital dollar. It just 
+      changed whose name was on the door. The infrastructure, the backing, 
+      the government benefit — all of that remained. What changed was the entity 
+      capturing the upside.
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 2: GENIUS ACT -->
+<section class="section" id="genius">
+  <div class="section-aside">PART II / THE ACT</div>
+
+  <div class="section-number reveal">PART 02 &nbsp;/&nbsp; THE FRAMEWORK</div>
+  <h2 class="section-title reveal">Enter the <em>GENIUS Act</em></h2>
+
+  <div class="section-body">
+    <p class="reveal">
+      In 2025, Congress passed the GENIUS Act — the first real federal framework for stablecoins. 
+      It wasn't crypto regulation in the traditional sense. It was closer to 
+      a charter for a new class of financial institution.
+    </p>
+  </div>
+
+  <div class="flow reveal" id="geniusFlow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-text">
+        <div class="flow-label">Rule One</div>
+        <div class="flow-desc">Full 1:1 Backing Required — <strong>no fractional reserves.</strong> Every digital dollar must equal a real dollar or government debt.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-text">
+        <div class="flow-label">Rule Two</div>
+        <div class="flow-desc">Reserves must be held in <strong>cash, bank deposits, or short-term U.S. Treasuries.</strong> Treasury-backed by default.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-text">
+        <div class="flow-label">Rule Three — The Key One</div>
+        <div class="flow-desc">Stablecoin issuers are <strong style="color: var(--accent2)">banned from paying interest to users.</strong> The yield from reserves? Stays with the issuer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue reveal">
+    <span class="callout-label">Translation</span>
+    When you hold a stablecoin, you are indirectly holding U.S. Treasuries —
+    and indirectly funding the U.S. government. But you receive none of the yield those Treasuries generate. 
+    That yield belongs to the company that issued your "money."
+  </div>
+</section>
+
+<!-- SECTION 3: FOLLOW THE MONEY -->
+<section class="section" id="money">
+  <div class="section-aside">PART III / THE MATH</div>
+
+  <div class="section-number reveal">PART 03 &nbsp;/&nbsp; FOLLOW THE MONEY</div>
+  <h2 class="section-title reveal">Your $1,000.<br>Their <em>Return.</em></h2>
+
+  <div class="section-body">
+    <p class="reveal">Let's make this mechanical. Here's exactly what happens when you deposit money into a stablecoin.</p>
+  </div>
+
+  <div class="flow" id="moneyFlow">
+    <div class="flow-step reveal">
+      <div class="flow-num">1</div>
+      <div class="flow-text">
+        <div class="flow-label">You Deposit</div>
+        <div class="flow-desc">You put in <strong>$1,000</strong>. You receive stablecoins worth $1,000.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step reveal">
+      <div class="flow-num">2</div>
+      <div class="flow-text">
+        <div class="flow-label">Issuer Buys Treasuries</div>
+        <div class="flow-desc">The issuer takes your $1,000 and buys <strong>U.S. Treasury bills</strong> yielding ~4–5% annually.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step reveal">
+      <div class="flow-num">3</div>
+      <div class="flow-text">
+        <div class="flow-label">Government Pays Interest</div>
+        <div class="flow-desc">The Treasury pays <strong>$40–50 per year</strong> on your $1,000. That money goes to the issuer.</div>
+      </div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step reveal">
+      <div class="flow-num">4</div>
+      <div class="flow-text">
+        <div class="flow-label">You Get Back…</div>
+        <div class="flow-desc"><strong style="color: var(--accent2)">$1,000. Exactly $1,000.</strong> No interest. No yield. No upside.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="winners-table reveal">
+    <div class="winners-col win">
+      <div class="winners-col-label">✦ Who Wins</div>
+      <div class="winner-item">
+        <div class="icon">🏦</div>
+        <div>
+          <strong>Stablecoin Issuers</strong>
+          Collect yield on billions in reserves. Pure margin, zero risk to them.
+        </div>
+      </div>
+      <div class="winner-item">
+        <div class="icon">🇺🇸</div>
+        <div>
+          <strong>U.S. Government</strong>
+          Gains a massive new, perpetual buyer of Treasury bills.
+        </div>
+      </div>
+      <div class="winner-item">
+        <div class="icon">🏛️</div>
+        <div>
+          <strong>Financial System</strong>
+          Gets a new controlled digital dollar layer without a government balance sheet.
+        </div>
+      </div>
+    </div>
+    <div class="winners-col lose">
+      <div class="winners-col-label">✦ Who Loses</div>
+      <div class="winner-item">
+        <div class="icon">👤</div>
+        <div>
+          <strong>You — The Holder</strong>
+          Providing an interest-free loan to both the issuer and the U.S. government simultaneously.
+        </div>
+      </div>
+      <div class="winner-item">
+        <div class="icon">💸</div>
+        <div>
+          <strong>Your Yield</strong>
+          Gone. By law. The GENIUS Act specifically prohibits issuers from passing interest to users.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: NOT ACCIDENTAL -->
+<section class="section" id="design">
+  <div class="section-aside">PART IV / DESIGN</div>
+
+  <div class="section-number reveal">PART 04 &nbsp;/&nbsp; THIS ISN'T ACCIDENTAL</div>
+  <h2 class="section-title reveal">Three Problems.<br>One <em>Elegant</em> Structure.</h2>
+
+  <div class="section-body">
+    <p class="reveal">
+      The GENIUS Act framework isn't a coincidence. It simultaneously solves 
+      three major problems for the financial and political establishment.
+    </p>
+  </div>
+
+  <div class="callout reveal">
+    <span class="callout-label">Problem 1 — Bank Run Risk</span>
+    Lawmakers were worried: if stablecoins paid interest, people would pull deposits 
+    from traditional banks in droves. Solution? Remove yield entirely. Banks remain 
+    competitive. Systemic risk neutralized.
+  </div>
+
+  <div class="callout blue reveal">
+    <span class="callout-label">Problem 2 — Dollar Dominance</span>
+    Stablecoins are globally accessible, dollar-denominated, and Treasury-backed. 
+    The U.S. now exports digital dollars worldwide — without printing physical cash. 
+    The dollar's reserve currency status is reinforced in the digital era 
+    without the Fed lifting a finger.
+  </div>
+
+  <div class="callout red reveal">
+    <span class="callout-label">Problem 3 — Cheaper Government Debt</span>
+    The sleeper effect. Stablecoin issuers become major, permanent buyers of U.S. Treasuries. 
+    More demand = lower yields = lower borrowing costs for the government. 
+    Research indicates this demand can meaningfully reduce Treasury yields — 
+    saving the government billions annually.
+  </div>
+
+  <div class="pull-quote reveal">
+    <div class="pull-quote-text">
+      Your money works. Just not for you.
+    </div>
+    <div class="pull-quote-attr">The GENIUS Act, Summarized</div>
+  </div>
+</section>
+
+<!-- SECTION 5: CBDC vs STABLECOINS -->
+<section class="section" id="verdict">
+  <div class="section-aside">PART V / COMPARISON</div>
+
+  <div class="section-number reveal">PART 05 &nbsp;/&nbsp; SPOT THE DIFFERENCE</div>
+  <h2 class="section-title reveal">CBDC vs. Stablecoins:<br><em>Twins</em> With Different Owners</h2>
+
+  <div class="section-body">
+    <p class="reveal">
+      Let's be clear about the functional reality here. The two systems are 
+      nearly identical in practice. The key difference is who captures the profit.
+    </p>
+  </div>
+
+  <div class="compare-grid reveal">
+    <div class="compare-cell header">Feature</div>
+    <div class="compare-cell header cbdc">CBDC (Banned)</div>
+    <div class="compare-cell header stable">Stablecoins (GENIUS)</div>
+
+    <div class="compare-cell">Digital Dollar</div>
+    <div class="compare-cell"><span class="check">✓</span>Yes</div>
+    <div class="compare-cell"><span class="check">✓</span>Yes</div>
+
+    <div class="compare-cell">1:1 Backed</div>
+    <div class="compare-cell"><span class="check">✓</span>Yes</div>
+    <div class="compare-cell"><span class="check">✓</span>Yes</div>
+
+    <div class="compare-cell">Issued By</div>
+    <div class="compare-cell">Federal Reserve</div>
+    <div class="compare-cell">Private Companies</div>
+
+    <div class="compare-cell">Backed By</div>
+    <div class="compare-cell">Gov. Liability</div>
+    <div class="compare-cell">U.S. Treasuries</div>
+
+    <div class="compare-cell">Pays User Interest</div>
+    <div class="compare-cell"><span class="cross">✗</span>No</div>
+    <div class="compare-cell"><span class="cross">✗</span>Banned by Law</div>
+
+    <div class="compare-cell">Yield Goes To</div>
+    <div class="compare-cell">Government</div>
+    <div class="compare-cell">Private Issuer</div>
+
+    <div class="compare-cell">Privacy Risk</div>
+    <div class="compare-cell">High</div>
+    <div class="compare-cell">Comparable</div>
+  </div>
+
+  <div class="section-body">
+    <p class="reveal">
+      Functionally? These systems are <mark>extremely similar.</mark> 
+      The principal difference — the one distinction that matters most in terms of 
+      real-world outcomes — is who captures the yield generated by your deposits.
+    </p>
+    <p class="reveal">
+      Under a CBDC: the government controls it, government benefits.
+      Under GENIUS stablecoins: private sector profits, government still benefits indirectly.
+      You, in both scenarios, hold a digital dollar that earns you nothing.
+    </p>
+  </div>
+</section>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="outro-bg">RE·CEN·TRAL·IZE</div>
+
+  <div class="outro-tagline reveal">The Real Question</div>
+
+  <h2 class="outro-title reveal">
+    <span class="strike">Decentralization</span><br>
+    <span class="accent">Better Branding</span>
+  </h2>
+
+  <p class="outro-sub reveal">
+    If the 2010s were about decentralization…<br>
+    the 2020s might be about something else entirely.
+  </p>
+
+  <div class="divider reveal" style="max-width: 400px; margin: 60px auto;">
+    <div class="divider-line"></div>
+    <div class="divider-icon">◆</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="callout reveal" style="max-width: 680px; margin: 0 auto; text-align: left;">
+    <span class="callout-label">Who Is This System Designed For?</span>
+    From one angle — <strong>this is genius.</strong> Stabilizes crypto. Strengthens the dollar. Funds government debt without raising taxes or printing money.<br><br>
+    From another angle — it's a quiet engineering of extraction where your capital does the work, generates the return, and you receive a perfectly stable $0 in yield in exchange for the privilege.
+  </div>
+
+  <div class="outro-badge reveal">
+    Not a CBDC… but close enough
+  </div>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  });
+
+  // Intersection observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // Stagger flow steps
+        if (entry.target.classList.contains('flow-step')) {
+          const siblings = entry.target.parentElement.querySelectorAll('.flow-step');
+          siblings.forEach((step, i) => {
+            setTimeout(() => step.classList.add('visible'), i * 120);
+          });
+        }
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal, .flow-step').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

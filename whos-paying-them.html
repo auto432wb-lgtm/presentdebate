@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Who's Paying Them? — A Video Essay Series</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:       #0e0e0e;
+      --paper:     #f5f0e8;
+      --cream:     #ede7d9;
+      --red:       #c0392b;
+      --reddeep:   #8b1a11;
+      --gold:      #c9902b;
+      --muted:     #6b6355;
+      --rule:      #c8bfad;
+      --mono:      'IBM Plex Mono', monospace;
+      --serif:     'Source Serif 4', serif;
+      --display:   'Playfair Display', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(16px, 1.15vw, 19px);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ────────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1rem, 4vw, 3rem);
+      height: 52px;
+      border-bottom: 2px solid var(--red);
+    }
+
+    #nav .brand {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    #nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    #nav-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rule);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    #nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─────────────────────────────────────────────────────── */
+    #hero {
+      padding-top: 52px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 119px,
+          rgba(255,255,255,0.025) 119px,
+          rgba(255,255,255,0.025) 120px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 59px,
+          rgba(255,255,255,0.015) 59px,
+          rgba(255,255,255,0.015) 60px
+        );
+    }
+
+    .hero-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--red) 0%, var(--gold) 100%);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(2rem, 6vw, 6rem) clamp(1.5rem, 8vw, 8rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      line-height: 0.95;
+      color: var(--paper);
+      max-width: 18ch;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.4vw, 1.3rem);
+      font-weight: 300;
+      color: var(--rule);
+      max-width: 55ch;
+      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .meta-item {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-item span {
+      color: var(--gold);
+      display: block;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      margin-top: 0.15rem;
+    }
+
+    .hero-scroll {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem clamp(1.5rem, 8vw, 8rem);
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .scroll-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+    }
+
+    /* ─── SERIES NAV ───────────────────────────────────────────────── */
+    #series {
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem clamp(1.5rem, 8vw, 8rem);
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 4rem;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .series-card {
+      background: var(--paper);
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .series-card:hover { background: var(--cream); }
+    .series-card.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .series-card.active .card-num { color: var(--red); }
+    .series-card.active .card-title { color: var(--paper); }
+    .series-card.active .card-desc { color: var(--rule); }
+    .series-card.active .card-duration { color: var(--muted); }
+
+    .card-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .card-title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-duration {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .card-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transition: width 0.3s;
+    }
+    .series-card.active .card-bar { width: 100%; }
+    .series-card:hover .card-bar { width: 100%; }
+
+    /* ─── MAIN CONTENT WRAPPER ─────────────────────────────────────── */
+    #content-area {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* ─── ESSAY SECTION ────────────────────────────────────────────── */
+    .essay { display: none; }
+    .essay.active { display: block; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .essay-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .essay-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .essay-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .essay-title em {
+      font-style: italic;
+      color: var(--reddeep);
+    }
+
+    .essay-dek {
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 55ch;
+      line-height: 1.6;
+    }
+
+    /* ─── PROSE ────────────────────────────────────────────────────── */
+    .prose p {
+      margin-bottom: 1.5em;
+      font-size: 1.05rem;
+      color: #1a1814;
+    }
+
+    .prose strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .prose em { font-style: italic; }
+
+    /* ─── SEGMENT HEADINGS ─────────────────────────────────────────── */
+    .seg {
+      margin: 3.5rem 0 1.5rem;
+      position: relative;
+    }
+    .seg-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .seg h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .seg-rule {
+      display: block;
+      width: 3rem;
+      height: 2px;
+      background: var(--red);
+      margin-top: 0.75rem;
+    }
+
+    /* ─── PULL QUOTES ──────────────────────────────────────────────── */
+    .pull {
+      border-left: 3px solid var(--red);
+      padding: 1.25rem 1.75rem;
+      margin: 2.5rem 0;
+      background: var(--cream);
+      position: relative;
+    }
+    .pull::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-family: var(--display);
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.3;
+    }
+    .pull p {
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: var(--ink);
+      margin: 0 !important;
+    }
+    .pull cite {
+      display: block;
+      font-family: var(--mono);
+      font-style: normal;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
+
+    /* ─── CALLOUT BOXES ────────────────────────────────────────────── */
+    .callout {
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--gold);
+      padding: 1.5rem;
+      margin: 2.5rem 0;
+      background: var(--cream);
+    }
+    .callout-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .callout p {
+      font-size: 0.92rem;
+      color: var(--ink);
+      margin: 0 !important;
+      line-height: 1.65;
+    }
+
+    /* ─── STAT BLOCKS ──────────────────────────────────────────────── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 2.5rem 0;
+    }
+    .stat {
+      background: var(--paper);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--red);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ─── DONOR TABLE ──────────────────────────────────────────────── */
+    .donor-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.88rem;
+    }
+    .donor-table th {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 2px solid var(--rule);
+    }
+    .donor-table td {
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .donor-table tr:hover td { background: var(--cream); }
+    .donor-table .amount {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--red);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .donor-table .note {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ─── SOURCES ──────────────────────────────────────────────────── */
+    .sources-block {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2rem;
+      margin: 3rem 0 0;
+    }
+    .sources-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .sources-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.25rem 2rem;
+    }
+    .sources-list li {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--rule);
+      padding: 0.2rem 0;
+      line-height: 1.4;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sources-list li::before {
+      content: '— ';
+      color: var(--red);
+    }
+
+    /* ─── OUTRO BLOCK ──────────────────────────────────────────────── */
+    .outro {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 3rem clamp(1.5rem, 5vw, 3rem);
+      margin-top: 4rem;
+      position: relative;
+    }
+    .outro::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--gold) 100%);
+    }
+    .outro p {
+      color: var(--rule);
+      font-size: 1rem;
+      max-width: 55ch;
+    }
+    .outro strong { color: var(--paper); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ─── PROGRESS BAR ─────────────────────────────────────────────── */
+    #progress {
+      position: fixed;
+      top: 52px;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      z-index: 99;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      #nav-links { display: none; }
+      .donor-table { font-size: 0.8rem; }
+      .donor-table th, .donor-table td { padding: 0.5rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="brand">Black Liberationist Review</div>
+  <ul id="nav-links">
+    <li><a href="#series">Series</a></li>
+    <li><a href="#content-area">Essays</a></li>
+    <li><a href="#sources-1">Sources</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Video Essay Series</div>
+    <h1 class="hero-title">
+      The <em>Debunking</em> Project
+    </h1>
+    <p class="hero-subtitle">
+      Three video essays dismantling the alt-right's genetic arguments, their "Black culture" deflection, and the manufactured Black conservative influence machine — with receipts.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">Essays<span>3 Parts</span></div>
+      <div class="meta-item">Total Runtime<span>~35 Minutes</span></div>
+      <div class="meta-item">Perspective<span>Black Liberationist</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-label">Select an essay below</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SERIES NAV -->
+<section id="series">
+  <div class="section-label">The Series</div>
+  <div class="series-grid">
+
+    <div class="series-card active" onclick="showEssay(1)" id="card-1">
+      <div class="card-bar"></div>
+      <div class="card-num">Essay 01</div>
+      <div class="card-title">The Dumbest Smart People on the Internet</div>
+      <div class="card-desc">Debunking the genetic IQ argument using WWI Army data, Horace Mann Bond, and the Flynn Effect.</div>
+      <div class="card-duration">~10 min</div>
+    </div>
+
+    <div class="series-card" onclick="showEssay(2)" id="card-2">
+      <div class="card-bar"></div>
+      <div class="card-num">Essay 02</div>
+      <div class="card-title">It's Not Black Culture — And Here's What It Actually Is</div>
+      <div class="card-desc">The plantation origins of what they call "Black culture," Scots-Irish honor codes, and media exploitation.</div>
+      <div class="card-duration">~10 min</div>
+    </div>
+
+    <div class="series-card" onclick="showEssay(3)" id="card-3">
+      <div class="card-bar"></div>
+      <div class="card-num">Essay 03</div>
+      <div class="card-title">Who's Paying Them?</div>
+      <div class="card-desc">The manufactured Black conservative movement: TPUSA, BLEXIT, white billionaire donors, and the FEC loophole.</div>
+      <div class="card-duration">~15 min</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CONTENT AREA
+     ═══════════════════════════════════════════════════════════════════ -->
+<div id="content-area">
+
+  <!-- ─── ESSAY 1 ─────────────────────────────────────────────────── -->
+  <article class="essay active" id="essay-1">
+
+    <header class="essay-header">
+      <div class="essay-num">Essay 01 / Video Script</div>
+      <h1 class="essay-title">The Dumbest Smart<br><em>People on the Internet</em></h1>
+      <p class="essay-dek">Nick Fuentes, Richard Spencer, and Dave Rubin keep citing race science — but the U.S. Army already debunked them. In 1917. Before sliced bread.</p>
+    </header>
+
+    <div class="prose">
+
+      <div class="seg">
+        <span class="seg-num">Cold Open</span>
+        <h2>Before Sliced Bread</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>So Nick Fuentes is worried about young Black men in downtown America. Richard Spencer has thoughts. Dave Rubin — a guy who somehow keeps getting invited to things — has weighed in too. And apparently the through-line of all their arguments is this: Black people are genetically less intelligent.</p>
+
+      <p>It's a race science claim. It's old. And here's the wild part — it was <strong>already debunked by the United States Army. In 1917.</strong> Before women could vote. Before sliced bread. The Army accidentally proved these guys wrong before their grandfathers were born, and they still haven't gotten the memo.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 1</span>
+        <h2>Who Are These Guys and Why Do They Keep Doing This?</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>Nick Fuentes is an internet personality who built a following by being the thing your racist uncle would be if your racist uncle had a ring light and more free time. Richard Spencer is the guy who coined the term "alt-right" and whose big intellectual project is basically: <em>what if we brought back something that lost World War II?</em> And Dave Rubin — look, Dave Rubin started as a left-leaning comedian, pivoted to "heterodox thinker," and now mostly just nods while people say wild things on his podcast and calls it bravery.</p>
+
+      <p>What unites them? The claim that Black Americans — specifically young Black men — are inherently more dangerous, more criminal, and less intelligent than white people. Not because of history. Not because of policy. Because of <em>genes.</em></p>
+
+      <p>This is called race science, or scientific racism, and it's been laundered through enough podcasts that some people think it's edgy and new. It is not. It is very, very old. And it has been embarrassed repeatedly by actual data.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 2</span>
+        <h2>The Army Accidentally Blew This Up in 1917</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">On Screen — Source</div>
+        <p>Army Beta Test Results &amp; Horace Mann Bond Analysis: <em>nyccivilrightshistory.org</em></p>
+      </div>
+
+      <p>World War I. The U.S. Army needed to process nearly two million recruits fast, so they brought in a team of psychologists — led by Robert Yerkes — to develop the first mass intelligence tests in American history. They called them the Army Alpha and Army Beta.</p>
+
+      <p>The Alpha was a written test for literate soldiers. The Beta was a picture-based test for those who couldn't read or didn't speak English. The people who designed these tests were, to put it charitably, not trying to help Black soldiers. They wanted the data to confirm their assumptions. Classic bad science.</p>
+
+      <div class="pull">
+        <p>Black people in the North had "infinitely superior home, civil, and above all school conditions," while their Southern peers had been "deprived of the same."</p>
+        <cite>— Horace Mann Bond, writing in the NAACP's The Crisis, 1924</cite>
+      </div>
+
+      <p>But here's where it got awkward for the racists. The test results showed that Black Americans from the North scored higher on average than Black Americans from the South. Some people at the time tried to spin this as "the smart ones migrated north."</p>
+
+      <p>But then a Black scholar named Horace Mann Bond — brilliant man, look him up — did something devastating. He cross-referenced the data differently. <strong>Bond showed that white draftees from Northern states regularly scored higher than white draftees from the South.</strong> So now you've got a problem. If the gap between Black and white scores is genetic, why do Northern white scores beat Southern white scores? Are Northern white people a different race? Are Ohioans genetically superior to Alabamans?</p>
+
+      <p>Of course not. The answer was obvious then and it's obvious now: it wasn't genes. It was schools. It was resources. It was what happens when you invest in — or actively deny — human beings the tools they need to develop. The Army data didn't prove Black people were less intelligent. It proved that <strong>poverty and educational deprivation make test scores go down.</strong></p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">1.7M</span>
+          <span class="stat-label">Soldiers Tested</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1917</span>
+          <span class="stat-label">Year Debunked</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100+</span>
+          <span class="stat-label">Years They've Ignored It</span>
+        </div>
+      </div>
+
+      <div class="seg">
+        <span class="seg-num">Section 3</span>
+        <h2>But What About the "Gap" Today?</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">On Screen — Source</div>
+        <p>Dickens &amp; Flynn (2006), "Black Americans Reduce the Racial IQ Gap": <em>Brookings Institution / Psychological Science</em></p>
+      </div>
+
+      <p>Okay, the alt-right guys will say: "But the gap in test scores still exists today!" And they're right that a gap exists. They are profoundly, embarrassingly wrong about what it means.</p>
+
+      <p>Researchers William Dickens and James Flynn analyzed 30 years of test-score data and found that from 1972 to 2002, Black Americans gained 5 to 6 IQ points more than white Americans — a reduction of the gap by roughly a quarter in a single generation. <strong>A quarter. In thirty years. That doesn't happen with genetics. Genes don't change in thirty years.</strong></p>
+
+      <p>This brings us to the Flynn Effect — named after researcher James Flynn — the well-documented phenomenon that IQ scores have been rising across the entire human population for decades. The average American in 1932 would score around 80 on today's IQ tests. Does that mean your great-grandparents were dumb? No. It means the test measures things that are <em>learned and environmentally shaped.</em> Always has.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 4</span>
+        <h2>The Scientific Consensus</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">On Screen — Source</div>
+        <p>National Academies of Sciences, Engineering, and Medicine, 2023: <em>nationalacademies.org</em></p>
+      </div>
+
+      <p>The scientific consensus today is clear: <strong>genetics does not explain differences in IQ test performance between groups, and observed differences are environmental in origin.</strong> A 2023 consensus report from the National Academies of Sciences stated that race is a socially constructed designation — a misleading and harmful surrogate for population genetic differences.</p>
+
+      <p>Nick Fuentes is not a researcher. Richard Spencer is not a geneticist. Dave Rubin is not even sure what he had for breakfast. These guys aren't engaging with the actual scientific complexity. They're cherry-picking the most contested fringe findings and presenting it as obvious truth to audiences who can't fact-check it in real time. That's not intellectual bravery. That's just vibes with a whiteboard.</p>
+
+    </div>
+
+    <div id="sources-1" class="sources-block">
+      <div class="sources-label">Sources — Essay 01</div>
+      <ul class="sources-list">
+        <li>Army Beta Test Results & Horace Mann Bond: nyccivilrightshistory.org</li>
+        <li>Dickens & Flynn (2006), Brookings Institution / Psychological Science</li>
+        <li>National Academies of Sciences Report (2023): nationalacademies.org</li>
+        <li>APA Task Force, "Intelligence: Knowns and Unknowns" (1996)</li>
+        <li>Stephen Jay Gould, The Mismeasure of Man</li>
+        <li>Wikipedia: History of the Race and Intelligence Controversy</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <!-- ─── ESSAY 2 ─────────────────────────────────────────────────── -->
+  <article class="essay" id="essay-2">
+
+    <header class="essay-header">
+      <div class="essay-num">Essay 02 / Video Script</div>
+      <h1 class="essay-title">It's Not Black Culture —<br><em>And Here's What It Actually Is</em></h1>
+      <p class="essay-dek">The plantation origins of what they're calling "Black culture," the Scots-Irish honor code they forgot to mention, and how liberal media profits from the same distortion.</p>
+    </header>
+
+    <div class="prose">
+
+      <div class="seg">
+        <span class="seg-num">Act 1</span>
+        <h2>"Black Culture" Is Not a Thing in the Way They're Using It</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>When Nick Fuentes says "Black culture," he's pointing at a very specific image: the inner-city, the rap video, the street code, the violence, the flash, the confrontation. He presents this as the natural expression of Black identity — as if every Black person in America woke up one morning and collectively decided this was their vibe.</p>
+
+      <p>This is a profound misunderstanding of what culture actually is and where it comes from. Here's a question: What <em>is</em> Black culture in America?</p>
+
+      <div class="callout">
+        <div class="callout-label">On Screen — Source</div>
+        <p>Gullah/Geechee Cultural Heritage Corridor Act, U.S. Congress 2006: <em>gullahgeecheecorridor.org</em></p>
+      </div>
+
+      <p>Is it the Gullah Geechee people of the South Carolina and Georgia Sea Islands — one of the most historically rich and <em>African-retaining</em> cultures anywhere in the Western Hemisphere? These people preserved West African spirituality, basket weaving techniques, agricultural knowledge, and a creole language that linguists still study today. <strong>That's Black culture.</strong></p>
+
+      <p>Is Black culture the tradition that gave America the blues, jazz, gospel, soul, and R&amp;B — the most globally influential musical forms in human history? American music — period — would not exist without Black people. <strong>That's Black culture.</strong></p>
+
+      <p>Is Black culture the intellectual tradition of Frederick Douglass, Ida B. Wells, W.E.B. Du Bois, Zora Neale Hurston, James Baldwin, Toni Morrison? <strong>That's Black culture.</strong></p>
+
+      <p>So when someone waves their hand at a drill rap video or a street brawl and says "that's Black culture" — they're not making an observation. They're making a choice. A very deliberate, very lazy, very convenient choice to flatten hundreds of years of the richest, most resilient cultural production in the Western world down to the worst thing they could find on WorldStar. That's not analysis. That's slander with a Powerpoint.</p>
+
+      <div class="seg">
+        <span class="seg-num">Act 2</span>
+        <h2>What They're Actually Pointing At — And Where It Really Comes From</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">On Screen — Source</div>
+        <p>Colin Woodard, <em>American Nations</em> (2011) — Nisbett &amp; Cohen, <em>Culture of Honor</em> (1996)</p>
+      </div>
+
+      <p>Now let's talk about what they <em>are</em> pointing at when they cite crime, aggression, the street code, and the "thug" aesthetic. Because those things exist. The question is: where did they come from?</p>
+
+      <p>The culture of honor. The street code. The deep suspicion of institutions. The hypermasculine posturing. The belief that violence is a legitimate response to disrespect. <strong>These are not African traits.</strong> These are not the cultural exports of Senegal or Ghana or Nigeria. These behavioral patterns have a very specific origin in American history — and it has almost nothing to do with Africa.</p>
+
+      <div class="pull">
+        <p>Clannish Scots-Irish, Scots, and north English frontiersmen spread across the highland South, carrying in their cultural DNA a "warrior ethic and a deep commitment to individual liberty and personal sovereignty."</p>
+        <cite>— Colin Woodard, American Nations (2011)</cite>
+      </div>
+
+      <p>These were people from the border regions of Scotland, Northern England, and Ulster Ireland — places that had experienced centuries of clan warfare, displacement, and institutional betrayal. They brought a "culture of honor" — a social system where personal reputation is everything, where insults cannot go unanswered, and where violence is a legitimate tool of social navigation.</p>
+
+      <p>Researchers Nisbett and Cohen found that consistently higher argument-related homicide rates in the South are a result of early historical and economic circumstances of the frontier — the culture of honor brought by Scots-Irish herding peoples. Studies have even linked higher murder rates in specific counties to the historical presence of Presbyterian churches — a proxy for Scots-Irish settlement.</p>
+
+      <p>Now hold that thought. Who were enslaved people in the American South living <em>next to</em> for two and a half centuries? Who did they work alongside, watch, listen to, and absorb behavioral patterns from? The plantation was not just an economic system. It was a cultural pressure cooker. What came out was a <em>creolized</em> culture — a hybrid of West African traditions, lowcountry isolation, Scots-Irish honor codes, Native American elements, and the particular psychology of people who had been violently stripped of formal institutions.</p>
+
+      <div class="pull">
+        <p>There was a constant process of "creolization" throughout the South in the slavery era.</p>
+        <cite>— S.C. Sea Grant Consortium, <em>Living Soul of Gullah</em></cite>
+      </div>
+
+      <p>So when Fuentes points at the street code and calls it "Black culture," he is — whether he knows it or not — pointing at the cultural residue of <em>his</em> ancestors' influence as much as anyone else's. You can't enslave a people for centuries alongside your most violent cultural traditions and then point at them for having absorbed some of those traditions. That's not an observation. That's revisionist history so aggressive it laps itself.</p>
+
+      <div class="seg">
+        <span class="seg-num">Act 3</span>
+        <h2>The Exploitation Machine — Liberal Media and Slum Tourism</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>Now — and I want to be clear that this critique cuts in a different direction — the alt-right is not the only group that has an interest in making the worst possible version of Black life look like the <em>real</em> Black life. The entertainment industry and certain progressive media have been doing it for decades too. For profit.</p>
+
+      <div class="pull">
+        <p>What began in the 1970s as a cultural expression created to provide an outlet from the destitute urban inner cities, through the control of corporate America, hip-hop became profitable through packaging and distributing the commodification of "black rage" for mainstream consumption.</p>
+        <cite>— The JFA Human Rights Journal</cite>
+      </div>
+
+      <p>This is what slum tourism media looks like: the documentary that rolls through a housing project to get the most shocking footage. The reality show that celebrates dysfunction in Black families while treating dysfunction in white families as quirky. The music label that tells a promising rapper "lose the backpack content, give me more trap." The algorithm that shows you the fight video instead of the graduation.</p>
+
+      <p>Corporate America funded one very specific version of Black identity — the violent, hypersexual, materialistic street figure — and defunded everything else. The political rap, the conscious rap, the introspective rap. Angela Davis warned that hip-hop got shaped by the demands of a capitalist marketplace. Bell hooks — not exactly a Fuentes ally — said that gangsta rap reflected the prevailing values of white supremacist capitalist patriarchy. <em>Black</em> critics, from the left, making the same observation: somebody is profiting from the worst possible image of Black life, and it ain't Black people.</p>
+
+    </div>
+
+    <div class="sources-block">
+      <div class="sources-label">Sources — Essay 02</div>
+      <ul class="sources-list">
+        <li>Gullah/Geechee Cultural Heritage: gullahgeecheecorridor.org</li>
+        <li>Colin Woodard, American Nations (2011)</li>
+        <li>Nisbett & Cohen, Culture of Honor (1996)</li>
+        <li>Commodification of Hip-Hop: thejfa.com</li>
+        <li>University of Michigan Hip-Hop Study: news.umich.edu (2026)</li>
+        <li>Gullah/Geechee Cultural Heritage Corridor Act, U.S. Congress 2006</li>
+        <li>S.C. Sea Grant Consortium: scseagrant.org</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <!-- ─── ESSAY 3 ─────────────────────────────────────────────────── -->
+  <article class="essay" id="essay-3">
+
+    <header class="essay-header">
+      <div class="essay-num">Essay 03 / Video Essay</div>
+      <h1 class="essay-title">Who's Paying <em>Them?</em></h1>
+      <p class="essay-dek">The manufactured Black conservative movement: TPUSA, BLEXIT, white billionaire donors, no-disclosure FEC loopholes, and the Chorus parallel. With receipts.</p>
+    </header>
+
+    <div class="prose">
+
+      <div class="seg">
+        <span class="seg-num">Cold Open</span>
+        <h2>Something Feels Off — And You're Right</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>You've seen them. The Black conservative influencer who shows up in your feed right after a police shooting, telling you to calm down. The "ex-Democrat" who suddenly has a studio, a logo, a tour schedule, and a book deal. The guy who's been in three Trump rallies in two months and somehow has 2 million followers now.</p>
+
+      <p>And something feels… off. You're not imagining it. You're not being paranoid. You're pattern-recognizing — and the pattern is real. Today we're going to follow the money. Because when you do, what you find isn't a grassroots awakening. What you find is an <strong>industry.</strong></p>
+
+      <div class="seg">
+        <span class="seg-num">Section 1</span>
+        <h2>What "Manufactured" Actually Means</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>Let's be precise. We're not saying every Black person who holds conservative views is paid to hold them. What we're talking about is an infrastructure — a network of organizations, donors, and media companies that identifies, funds, trains, platforms, and amplifies specific Black voices specifically because those voices provide cover for a political project that would otherwise be nakedly white.</p>
+
+      <p>The question isn't whether these individuals believe what they say. The question is: <em>why are they on TV?</em> Who is paying for the tours, the summits, the merch drops, the studio time? Those answers tell a different story than the one being sold.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 2</span>
+        <h2>The Infrastructure — Three Pillars</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p><strong>Pillar One: Turning Point USA.</strong> TPUSA's own website openly describes itself as an organization that "curates some of the country's top conservative influencers — covering a spectrum of topics ranging from politics to pop culture." That word — <em>curates</em> — is doing a lot of work. They are not discovering organic voices. They are <em>building</em> them.</p>
+
+      <div class="callout">
+        <div class="callout-label">Documented</div>
+        <p>In 2021, TPUSA shifted tactics to focus on "building up their army of conservative influencers rather than push a conservative agenda themselves." Two days before their annual conference, student ambassadors attended an "influencer retreat" where they were taught how to be more effective conservative content creators. — SourceWatch / TPUSA</p>
+      </div>
+
+      <p>In the 2019–20 fiscal year alone, TPUSA raised more than $39.2 million from donors including Koch-affiliated networks, fossil fuel billionaires, and right-wing mega-foundations. <strong>Officer Brandon Tatum</strong> — one of the most visible Black conservative voices in America — is a listed TPUSA Contributor, explicitly described on their own site as serving TPUSA's mission.</p>
+
+      <p><strong>Pillar Two: BLEXIT.</strong> Co-founded by Candace Owens and Brandon Tatum, ostensibly as a grassroots Black movement. Now let's look at who's actually funding this "Black grassroots movement."</p>
+
+      <table class="donor-table">
+        <thead>
+          <tr>
+            <th>Donor / Foundation</th>
+            <th>Amount</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Darwin Deason Family Foundation<br><span class="note">White Texas billionaire; also funds AFP, TPUSA</span></td>
+            <td class="amount">$190,000</td>
+            <td class="note">2020</td>
+          </tr>
+          <tr>
+            <td>Dunn Foundation<br><span class="note">White billionaire William Dunn; also funds PragerU, David Horowitz Freedom Center</span></td>
+            <td class="amount">$500,000</td>
+            <td class="note">2019–2020</td>
+          </tr>
+          <tr>
+            <td>Laura &amp; Isaac Perlmutter Foundation<br><span class="note">Marvel Entertainment chairman; also funds TPUSA</span></td>
+            <td class="amount">$250,000</td>
+            <td class="note">2020</td>
+          </tr>
+          <tr>
+            <td>National Christian Foundation<br><span class="note">Donor-advised fund; donor names hidden</span></td>
+            <td class="amount">$440,000</td>
+            <td class="note">2019–2021</td>
+          </tr>
+          <tr>
+            <td>Fidelity Charitable Gift Fund<br><span class="note">Largest charity in U.S.; donor-advised fund</span></td>
+            <td class="amount">$317,000</td>
+            <td class="note">2020–2021</td>
+          </tr>
+          <tr>
+            <td>Rebekah Mercer (Board member)<br><span class="note">Bankrolled Steve Bannon; far-right mega-donor</span></td>
+            <td class="amount">Board seat</td>
+            <td class="note">Joined 2021</td>
+          </tr>
+          <tr>
+            <td>Willis Johnson Foundation<br><span class="note">Automobile auction billionaire</span></td>
+            <td class="amount">$100,000</td>
+            <td class="note">2020</td>
+          </tr>
+          <tr>
+            <td>Thomas W. Smith Foundation<br><span class="note">Major anti-CRT funder; funds The Federalist</span></td>
+            <td class="amount">$100,000</td>
+            <td class="note">2020</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <div class="callout-label">Source</div>
+        <p>EXPOSEDbyCMD.org — "Candace Owens' Blexit Operation Bankrolled by Wealthy White Conservatives," January 2023. All figures from public IRS Form 990 filings.</p>
+      </div>
+
+      <p>In March 2023, TPUSA formally merged with BLEXIT, providing resources, staff, and infrastructure going forward. The "Black grassroots movement to leave the Democratic Party" was funded almost entirely by wealthy white Republican megadonors, routed through anonymous donor vehicles, to Black spokespeople who were then amplified across conservative media.</p>
+
+      <p><strong>Pillar Three: The Daily Wire / PragerU Ecosystem.</strong> The Daily Wire reported $100 million in annual revenue. PragerU raised $65 million in 2022 alone. Both organizations actively recruit and platform Black conservative voices — not because those voices represent the Black community, but because they provide a specific rhetorical function: making white conservative policy positions appear post-racial.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 3</span>
+        <h2>The Regulatory Vacuum — Why This Is So Easy to Hide</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">$1.8M</span>
+          <span class="stat-label">Trump 2020 Campaign paid to influencer firm (FEC filing)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">$500K</span>
+          <span class="stat-label">NRCC paid to Creator Grid Inc. (connects GOP candidates with conservative influencers)</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">$0</span>
+          <span class="stat-label">Required disclosure for paid political influencer posts under current FEC rules</span>
+        </div>
+      </div>
+
+      <p>TV ads require disclosure. Radio ads require disclosure. Direct mail requires disclosure. But if you pay someone with a million TikTok followers to make videos supporting your candidate or attacking your opponent, there is <strong>no legal requirement to disclose that relationship.</strong></p>
+
+      <p>The money flowing through PACs, nonprofits, and donor-advised funds is largely invisible. This infrastructure specifically targets demographics the GOP has historically struggled with — using influencers whose demographic identity provides the persuasion that a white politician cannot.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 4</span>
+        <h2>The Chorus Parallel — Yes, the Left Does It Too</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p>Because intellectual honesty matters: yes, the Chorus program exists. The Sixteen Thirty Fund launched a Chorus Creator Incubator Program in 2025 to pay Democratic-leaning influencers between $250 to $8,000 per month. Contracts stipulated that creators would be removed from the program if they disclosed the partnership without approval. That's a problem. Legitimately a problem.</p>
+
+      <p>But here's the key distinction: the Chorus program pays existing progressive creators to make more content about issues they already cover. It's undisclosed sponsorship of organic voices. Shady? Yes. But no one <em>invented</em> those creators, built them a platform from nothing, constructed an ideological identity for them, and deployed them specifically to suppress Black political self-determination.</p>
+
+      <div class="pull">
+        <p>Some analysts argue that the real goal of BLEXIT isn't to convert — but to confuse — so that a Black Democratic voter feels demoralized and doesn't vote at all.</p>
+        <cite>— QC Nerve analysis of the Charlotte BLEXIT event</cite>
+      </div>
+
+      <p>One non-vote for Democrats is functionally the same as one vote for Republicans in a close election. Depressing Black turnout has always been a more achievable Republican goal than actually converting Black voters.</p>
+
+      <div class="seg">
+        <span class="seg-num">Section 5</span>
+        <h2>The Specific Faces — And the Pattern</h2>
+        <span class="seg-rule"></span>
+      </div>
+
+      <p><strong>Candace Owens</strong> — built by TPUSA, funded by white billionaires through BLEXIT, platformed by PragerU and Daily Wire, and eventually discarded when her antisemitism became a liability to the same donor base funding Israel-aligned conservative causes. Her entire trajectory is institutional, not organic.</p>
+
+      <p><strong>Brandon Tatum (Officer Tatum)</strong> — co-founded BLEXIT with Owens in 2018. Currently a listed TPUSA contributor, explicitly described as serving TPUSA's mission. He is on their contributor page. He is, functionally, staff. His "independent" political commentary is produced within an organization funded by white Republican megadonors.</p>
+
+      <p><strong>The Hodgetwins</strong> — started as a fitness and comedy channel, pivoted hard to conservative political content around 2020. They have appeared at TPUSA events, been amplified heavily by conservative media. In a Daily Wire interview, they explicitly credited Ben Shapiro, Candace Owens, and Larry Elder with shifting their political views. Those are exactly the TPUSA/Daily Wire ecosystem figures one would expect to see if the recruitment pipeline is working as designed.</p>
+
+      <p>The pattern across all of these figures is the same: independent platform → contact with TPUSA/Daily Wire/PragerU ecosystem → rapid follower growth → appearance at conservative events → co-signing positions that serve white conservative donors rather than Black communities.</p>
+
+    </div>
+
+    <div class="outro">
+      <p>The manufactured Black right is not a conspiracy theory. It is a <strong>documented, funded, institutionally organized influence operation</strong> with paper trails, 990 tax filings, FEC disclosures, and named donors.</p>
+      <br/>
+      <p>It is not grassroots. It is not organic. And it is not for you.</p>
+      <br/>
+      <p>When you see a Black face telling you that racism isn't real, that the police are your friends, that your community's problems come from Democrats and not from centuries of deliberately constructed inequality — <strong>ask who's paying for the studio.</strong> Ask who funded the tour. Ask who's on the foundation board.</p>
+      <br/>
+      <p>The money will tell you everything the message won't.</p>
+    </div>
+
+    <div class="sources-block">
+      <div class="sources-label">Sources — Essay 03</div>
+      <ul class="sources-list">
+        <li>TPUSA Influencer Program: tpusa.com/contributors</li>
+        <li>TPUSA / SourceWatch: sourcewatch.org</li>
+        <li>BLEXIT White Donor Funding: exposedbycmd.org (Jan. 2023)</li>
+        <li>TPUSA/BLEXIT Merger: barrettmedia.com (March 2023)</li>
+        <li>Paid Influencer / No Disclosure Gap: CNN, Washington Post (Oct. 2024)</li>
+        <li>NRCC Creator Grid Payments: Washington Post (Oct. 2024)</li>
+        <li>Chorus / Sixteen Thirty Fund: Wired / Taylor Lorenz (2025)</li>
+        <li>Trump Black Vote Shift: Pew Research / ABC News (2025)</li>
+        <li>Center for Media Engagement, UT Austin: mediaengagement.org</li>
+        <li>Brandon Tatum / TPUSA: tpusa.com</li>
+      </ul>
+    </div>
+
+  </article>
+
+</div><!-- end content-area -->
+
+<!-- FOOTER -->
+<footer>
+  Black Liberationist Review &nbsp;·&nbsp; Video Essay Series &nbsp;·&nbsp; All sources cited and publicly verifiable
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────────────────────────── -->
+<script>
+  // ─── ESSAY SWITCHER ──────────────────────────────────────────────
+  function showEssay(num) {
+    document.querySelectorAll('.essay').forEach(e => e.classList.remove('active'));
+    document.querySelectorAll('.series-card').forEach(c => c.classList.remove('active'));
+    document.getElementById('essay-' + num).classList.add('active');
+    document.getElementById('card-' + num).classList.add('active');
+    document.getElementById('content-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ─── READ PROGRESS ────────────────────────────────────────────────
+  const progressBar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  });
+
+  // ─── REVEAL ON SCROLL ────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.seg, .pull, .callout, .stat-row, .donor-table').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
