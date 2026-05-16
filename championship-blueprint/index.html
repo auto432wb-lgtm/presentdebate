@@ -1,16 +1,521 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Championship Blueprint</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-D-6flBVo.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B8lQ7ONb.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Championship Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1d3a;
+      --navy-2: #17325f;
+      --gold: #f5c518;
+      --gold-2: #ffd93d;
+      --paper: #f8f7f4;
+      --ink: #111827;
+      --muted: #5f6b7a;
+      --green: #2e5a38;
+      --red: #b91c1c;
+      --purple: #5b3aa8;
+      --line: rgba(11, 29, 58, 0.1);
+      --shadow: 0 18px 42px rgba(11, 29, 58, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .heading {
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 48%, var(--navy) 100%);
+      color: white;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 80%, rgba(245, 197, 24, 0.16) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(245, 197, 24, 0.025) 80px, rgba(245, 197, 24, 0.025) 82px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 96px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 10ch;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(3.4rem, 8vw, 6.3rem);
+      line-height: 0.94;
+      letter-spacing: 0.03em;
+    }
+
+    h1 span { color: var(--gold); }
+
+    .hero-sub {
+      max-width: 54ch;
+      margin-top: 22px;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 14px 34px rgba(245, 197, 24, 0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-label::after {
+      content: '';
+      width: 44px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .title {
+      margin: 0;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1;
+      color: var(--navy);
+    }
+
+    .lede {
+      max-width: 56ch;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .stat-card, .case-card, .quote-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 26px 22px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: Oswald, sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1;
+      color: var(--navy);
+    }
+
+    .stat-value span { color: var(--gold); }
+
+    .stat-title {
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--navy);
+    }
+
+    .stat-sub {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .feature-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-panel h3,
+    .case-card h3,
+    .quote-card h3 {
+      margin: 0 0 10px;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 1.55rem;
+      color: var(--navy);
+    }
+
+    .feature-panel p,
+    .case-card p,
+    .quote-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .case-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .case-card {
+      padding: 22px;
+      border-left: 4px solid var(--navy);
+    }
+
+    .case-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .rapid-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .quote-card {
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(245,197,24,0.08), rgba(255,255,255,0.96));
+      border: 1px solid rgba(245,197,24,0.2);
+    }
+
+    .quote-card blockquote {
+      margin: 0;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-size: clamp(1.35rem, 3vw, 2.25rem);
+      line-height: 1.18;
+      color: var(--navy);
+    }
+
+    .verdict {
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: white;
+      text-align: center;
+      padding: 110px 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .verdict::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(245, 197, 24, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .verdict-inner {
+      position: relative;
+      z-index: 1;
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .verdict-big {
+      margin: 0;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      color: var(--gold);
+      text-shadow: 0 0 22px rgba(245, 197, 24, 0.18);
+    }
+
+    .verdict-small {
+      margin-top: 18px;
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-size: clamp(1rem, 2.4vw, 1.8rem);
+      color: white;
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      .hero-inner { padding-bottom: 72px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow mono">Featured Presentation</div>
+      <h1>Defense Wins <span>Championships</span></h1>
+      <p class="hero-sub">A four-round case against the quarterback myth: the argument that football success is driven less by individual star power than by defense, structure, and total roster strength.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary mono" href="#round1">Enter the Arena</a>
+        <a class="btn btn-secondary mono" href="../index.html">Back to Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="round1">
+      <div class="wrap">
+        <div class="section-label mono">Round 1</div>
+        <h2 class="title">Forget the Quarterback</h2>
+        <p class="lede">The central claim is blunt: dynasties get narrated through quarterbacks, but titles are more often secured by dominant defenses, organizational depth, and collective execution.</p>
+
+        <div class="split">
+          <article class="feature-panel">
+            <div class="tag mono">Core Premise</div>
+            <h3>You need a defense, not a quarterback.</h3>
+            <p>Quarterbacks are framed as saviors. But every snap depends on protection, play design, field position, and the ability to stop the other side. The real question isn’t who throws the ball. It’s who controls the game.</p>
+          </article>
+
+          <div class="case-list">
+            <article class="case-card" style="border-left-color:#2e5a38;">
+              <div class="case-meta"><span>Trent Dilfer</span><span>2000 Ravens</span></div>
+              <p>Won the Super Bowl behind a defense that allowed just 165 points all season.</p>
+            </article>
+            <article class="case-card" style="border-left-color:#b91c1c;">
+              <div class="case-meta"><span>Brad Johnson</span><span>2002 Buccaneers</span></div>
+              <p>A journeyman quarterback paired with one of the most dominant defenses of the modern era.</p>
+            </article>
+            <article class="case-card" style="border-left-color:#17325f;">
+              <div class="case-meta"><span>Nick Foles</span><span>2017 Eagles</span></div>
+              <p>A backup quarterback reached the summit because the team around him was built to survive and strike.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="round2" style="background:#ffffff;">
+      <div class="wrap">
+        <div class="section-label mono">Round 2</div>
+        <h2 class="title">Five Premises</h2>
+        <p class="lede">The argument widens here: from individual examples to structural patterns about playoff success, team construction, and what championship football actually rewards.</p>
+
+        <div class="card-grid">
+          <article class="stat-card">
+            <div class="stat-value">29<span>%</span></div>
+            <div class="stat-title mono">Of Super Bowl champs since 2000</div>
+            <div class="stat-sub">Had non-elite quarterbacks.</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-value">75<span>%</span></div>
+            <div class="stat-title mono">Of playoff wins</div>
+            <div class="stat-sub">Went to the team that won the rushing battle.</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-value">18<span>/24</span></div>
+            <div class="stat-title mono">Champions carried</div>
+            <div class="stat-sub">A top-10 scoring defense.</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-value">22</div>
+            <div class="stat-title mono">Starters on the field</div>
+            <div class="stat-sub">The quarterback is one of them.</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-value">35</div>
+            <div class="stat-title mono">Snaps with the ball</div>
+            <div class="stat-sub">Out of roughly sixty-five offensive plays.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="round3">
+      <div class="wrap">
+        <div class="section-label mono">Round 3</div>
+        <h2 class="title">Counter-Arguments, Answered</h2>
+        <p class="lede">The rebuttal section is built for direct debate: each common defense of quarterback centrality gets answered with a structural response.</p>
+
+        <div class="card-grid">
+          <article class="feature-panel">
+            <div class="tag mono">Argument</div>
+            <h3>“Mahomes and Brady won multiple.”</h3>
+            <p>Two outliers do not erase the long list of elite quarterbacks who never reached the top. Dynasties are memorable because they are rare.</p>
+          </article>
+          <article class="feature-panel">
+            <div class="tag mono">Argument</div>
+            <h3>“It’s a passing league.”</h3>
+            <p>The 2015 Broncos won while dragging a broken offensive performance across the line because the defense could dominate games outright.</p>
+          </article>
+          <article class="feature-panel">
+            <div class="tag mono">Argument</div>
+            <h3>“QBs get paid the most.”</h3>
+            <p>Salary reflects market mythology as much as championship causation. Cost and importance are not identical categories.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="round4" style="background:linear-gradient(135deg, #0b1d3a, #17325f); color:white;">
+      <div class="wrap">
+        <div class="section-label mono" style="color:var(--gold);">Round 4</div>
+        <h2 class="title" style="color:white;">One-Liners &amp; Stat Bombs</h2>
+        <p class="lede" style="color:rgba(255,255,255,0.68);">Short-form lines sharpen the thesis into memorable hits designed for quick debate, presentation rhythm, and rhetorical punch.</p>
+
+        <div class="rapid-grid">
+          <article class="quote-card">
+            <blockquote>Trent Dilfer has as many rings as Dan Marino, Philip Rivers, and Warren Moon combined.</blockquote>
+          </article>
+          <article class="quote-card">
+            <blockquote>Brock Purdy was the last pick in the draft and still reached the edge of a title run.</blockquote>
+          </article>
+          <article class="quote-card">
+            <blockquote>If elite quarterbacking is everything, why did Nick Foles beat Tom Brady in a Super Bowl shootout?</blockquote>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="verdict" id="verdict">
+      <div class="verdict-inner">
+        <div class="eyebrow mono" style="justify-content:center; color:var(--gold);">Final Verdict</div>
+        <h2 class="verdict-big">Defense</h2>
+        <div class="verdict-small">Wins Championships</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Featured presentation page</div>
+  </footer>
+</body>
 </html>
