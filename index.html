@@ -1,15 +1,176 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Championship Blueprint</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Present Debate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #121722;
+      --card: #171d2b;
+      --text: #edf2ff;
+      --muted: #9aa7c2;
+      --line: rgba(255,255,255,0.08);
+      --accent: #6ea8fe;
+      --accent-2: #8b5cf6;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1a2233 0%, var(--bg) 45%);
+      color: var(--text);
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .hero {
+      padding: 88px 0 48px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      font: 700 12px/1 JetBrains Mono, monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-family: Oswald, Inter, sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: .95;
+      letter-spacing: .01em;
+    }
+    .sub {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.7;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 36px 0 72px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: .96rem;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      border-color: transparent;
+      font-weight: 700;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+    }
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      padding: 22px 0 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Presentation Hub</div>
+      <h1>Present Debate</h1>
+      <p class="sub">Standalone presentation pages and debate decks. The newly restored Kimi deployment is linked below as a self-contained app bundle, alongside the existing HTML presentation files already in the repo.</p>
+      <div class="meta">
+        <div class="pill">Restored to workspace</div>
+        <div class="pill">GitHub Pages friendly</div>
+        <div class="pill">Kimi deployment v2 included</div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <div class="grid">
+      <article class="card">
+        <h2>Newly Added</h2>
+        <p>The latest Kimi-built presentation has been preserved as its own deployable folder so its JS/CSS bundle stays intact.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="./kimi-agent-deployment-v2/">Open Kimi Agent Deployment v2</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Existing Standalone Presentations</h2>
+        <p>These are the individual HTML debate pages already present in the repository.</p>
+        <div class="actions">
+          <a class="btn btn-secondary" href="./genius-act-presentation.html">Genius Act</a>
+          <a class="btn btn-secondary" href="./integration-net-positive.html">Integration Net Positive</a>
+          <a class="btn btn-secondary" href="./new_cointelpro_presentation.html">COINTELPRO</a>
+          <a class="btn btn-secondary" href="./no-empirical-evidence-precolumbian-africa-negative.html">No Empirical Evidence</a>
+          <a class="btn btn-secondary" href="./precolumbus-evidence-negative.html">Precolumbus Evidence</a>
+          <a class="btn btn-secondary" href="./sahel_presentation.html">Sahel</a>
+          <a class="btn btn-secondary" href="./state-capitalism-affirmative.html">State Capitalism</a>
+          <a class="btn btn-secondary" href="./whos-paying-them.html">Who's Paying Them?</a>
+          <a class="btn btn-secondary" href="./wlfi_scandal_presentation.html">WLFI Scandal</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">Restored in workspace and wired into the repo hub.</div>
+  </footer>
+</body>
 </html>
