@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Present Debate — Editorial Hub</title>
+  <title>Present Debate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0f0f10;
-      --paper: #f3efe6;
-      --cream: #e8e0d1;
-      --stone: #cfc4b2;
-      --muted: #6a6256;
-      --gold: #bf8b30;
-      --red: #9f2f21;
-      --line: rgba(15, 15, 16, 0.12);
+      --ink: #171412;
+      --paper: #f7f2e8;
+      --paper-2: #fbf7ef;
+      --cream: #efe6d8;
+      --stone: #cabda8;
+      --muted: #6c6257;
+      --gold: #b7862e;
+      --red: #9b3225;
+      --line: rgba(23, 20, 18, 0.12);
       --mono: 'IBM Plex Mono', monospace;
       --serif: 'Source Serif 4', serif;
       --display: 'Playfair Display', serif;
-      --shadow: 0 18px 48px rgba(10, 10, 10, 0.14);
+      --shadow: 0 16px 40px rgba(32, 24, 17, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -30,7 +31,7 @@
       background: var(--paper);
       color: var(--ink);
       font-family: var(--serif);
-      line-height: 1.7;
+      line-height: 1.72;
       font-size: 18px;
     }
 
@@ -39,8 +40,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.22;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.05' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.02' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
       z-index: 9999;
     }
 
@@ -50,7 +51,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(243, 239, 230, 0.92);
+      background: rgba(247, 242, 232, 0.92);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--line);
     }
@@ -62,7 +63,7 @@
     }
 
     .nav-inner {
-      min-height: 60px;
+      min-height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -89,21 +90,13 @@
     }
 
     .hero {
-      background: linear-gradient(180deg, #161616 0%, #1d1b1a 100%);
-      color: var(--paper);
       position: relative;
       overflow: hidden;
-      border-bottom: 4px solid var(--red);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
       background:
-        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.03) 79px, rgba(255,255,255,0.03) 80px),
-        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.02) 59px, rgba(255,255,255,0.02) 60px);
-      opacity: 0.55;
+        linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.12)),
+        repeating-linear-gradient(90deg, transparent, transparent 84px, rgba(23,20,18,0.025) 84px, rgba(23,20,18,0.025) 85px),
+        var(--paper-2);
+      border-bottom: 2px solid var(--red);
     }
 
     .hero-accent {
@@ -117,8 +110,7 @@
 
     .hero-inner {
       position: relative;
-      z-index: 1;
-      padding: 86px 0 74px;
+      padding: 84px 0 74px;
     }
 
     .eyebrow {
@@ -129,20 +121,20 @@
       font-size: 12px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--red);
       margin-bottom: 20px;
     }
 
     .eyebrow::before {
       content: '';
-      width: 36px;
+      width: 38px;
       height: 1px;
-      background: var(--gold);
+      background: var(--red);
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.75fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.76fr);
       gap: 42px;
       align-items: end;
     }
@@ -151,163 +143,59 @@
       margin: 0;
       font-family: var(--display);
       font-weight: 900;
-      font-size: clamp(3.2rem, 8vw, 6.7rem);
-      line-height: 0.92;
+      font-size: clamp(3.1rem, 8vw, 6.4rem);
+      line-height: 0.94;
       letter-spacing: -0.03em;
       max-width: 10ch;
+      color: var(--ink);
     }
 
     .hero-title em {
-      color: var(--gold);
+      color: var(--red);
       font-style: italic;
     }
 
     .hero-sub {
       margin: 22px 0 0;
       max-width: 58ch;
-      color: #d7d0c3;
-      font-size: clamp(1rem, 1.8vw, 1.22rem);
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
     }
 
     .hero-aside {
-      border-left: 1px solid rgba(255,255,255,0.16);
-      padding-left: 24px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(23,20,18,0.08);
+      padding: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .aside-label {
+    .aside-label,
+    .feature-kicker,
+    .deck-kicker,
+    .section-label,
+    .footer-line {
       font-family: var(--mono);
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
     }
 
-    .aside-copy {
-      color: #d7d0c3;
-      font-size: 0.98rem;
-      margin: 0 0 20px;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
-    }
-
-    .meta-pill {
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #d7d0c3;
-    }
-
-    .section {
-      padding: 58px 0;
-    }
-
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 26px;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-
-    .section-label::after {
-      content: '';
-      width: 54px;
-      height: 1px;
-      background: var(--red);
-    }
-
-    .lead-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.85fr);
-      gap: 28px;
-      align-items: start;
-    }
-
-    .lede {
-      font-size: clamp(1.22rem, 2vw, 1.5rem);
-      line-height: 1.6;
-      margin: 0;
-      max-width: 42ch;
-    }
-
-    .note-card {
-      background: var(--cream);
-      border: 1px solid rgba(15,15,16,0.08);
-      border-top: 4px solid var(--gold);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .note-card h2 {
-      margin: 0 0 10px;
-      font-family: var(--display);
-      font-size: 1.45rem;
-      line-height: 1.1;
-    }
-
-    .note-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .feature {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
-      gap: 1px;
-      background: rgba(15,15,16,0.14);
-      border: 1px solid rgba(15,15,16,0.14);
-      margin-top: 36px;
-    }
-
-    .feature-main,
-    .feature-side {
-      background: var(--paper);
-      padding: 28px;
-    }
-
-    .feature-kicker,
-    .deck-kicker {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .aside-label {
       color: var(--gold);
       margin-bottom: 12px;
     }
 
-    .feature-main h2 {
-      margin: 0;
-      font-family: var(--display);
-      font-size: clamp(2rem, 4vw, 3.35rem);
-      line-height: 0.98;
-    }
-
-    .feature-main p,
-    .feature-side p {
+    .aside-copy {
       color: var(--muted);
-      margin: 16px 0 0;
+      font-size: 0.98rem;
+      margin: 0;
     }
 
     .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 22px;
     }
 
     .btn {
@@ -317,11 +205,11 @@
       min-height: 46px;
       padding: 0 18px;
       border-radius: 999px;
+      border: 1px solid rgba(23,20,18,0.18);
       font-family: var(--mono);
       font-size: 12px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      border: 1px solid var(--ink);
       transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     }
 
@@ -336,26 +224,134 @@
     .btn-secondary {
       background: transparent;
       color: var(--ink);
-      border-color: rgba(15,15,16,0.2);
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .meta-pill {
+      border: 1px solid rgba(23,20,18,0.12);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255,255,255,0.58);
+    }
+
+    .section {
+      padding: 56px 0;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+
+    .section-label::after {
+      content: '';
+      width: 54px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.82fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 42ch;
+      font-size: clamp(1.2rem, 2vw, 1.48rem);
+      line-height: 1.58;
+    }
+
+    .note-card {
+      background: var(--cream);
+      border: 1px solid rgba(23,20,18,0.08);
+      border-top: 4px solid var(--gold);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .note-card h2 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      font-size: 1.42rem;
+      line-height: 1.08;
+    }
+
+    .note-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 1px;
+      background: rgba(23,20,18,0.14);
+      border: 1px solid rgba(23,20,18,0.14);
+      margin-top: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-main,
+    .feature-side {
+      background: var(--paper-2);
+      padding: 28px;
+    }
+
+    .feature-kicker,
+    .deck-kicker {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .feature-main h2 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 0.98;
+    }
+
+    .feature-main p,
+    .feature-side p {
+      color: var(--muted);
+      margin: 16px 0 0;
     }
 
     .decks-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
       gap: 1px;
-      background: rgba(15,15,16,0.14);
-      border: 1px solid rgba(15,15,16,0.14);
-      margin-top: 30px;
+      background: rgba(23,20,18,0.14);
+      border: 1px solid rgba(23,20,18,0.14);
+      margin-top: 28px;
+      box-shadow: var(--shadow);
     }
 
     .deck {
-      background: var(--paper);
+      background: var(--paper-2);
       padding: 22px;
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .deck:hover {
-      background: #f8f4ed;
+      background: #fffdf8;
       transform: translateY(-2px);
     }
 
@@ -382,10 +378,9 @@
     }
 
     .footer {
-      background: var(--ink);
-      color: #d7d0c3;
-      margin-top: 36px;
-      border-top: 4px solid var(--gold);
+      background: #f1e8da;
+      border-top: 2px solid var(--gold);
+      margin-top: 34px;
     }
 
     .footer-inner {
@@ -395,17 +390,13 @@
     }
 
     .footer-line {
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
+      color: var(--red);
       margin-bottom: 10px;
     }
 
     .footer-copy {
-      color: #bcb3a5;
-      max-width: 54ch;
+      color: var(--muted);
+      max-width: 56ch;
       margin: 0;
       font-size: 0.95rem;
     }
@@ -415,13 +406,6 @@
       .lead-grid,
       .feature {
         grid-template-columns: 1fr;
-      }
-
-      .hero-aside {
-        border-left: 0;
-        padding-left: 0;
-        border-top: 1px solid rgba(255,255,255,0.12);
-        padding-top: 22px;
       }
     }
 
@@ -433,15 +417,15 @@
         flex-direction: column;
       }
       .nav-links { gap: 12px; }
-      .hero-inner { padding: 62px 0 54px; }
-      .section { padding: 44px 0; }
+      .hero-inner { padding: 60px 0 52px; }
+      .section { padding: 42px 0; }
     }
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="nav-inner">
-      <div class="brand">Present Debate / Editorial Hub</div>
+      <div class="brand">Present Debate</div>
       <div class="nav-links">
         <a href="#featured">Featured</a>
         <a href="#archive">Archive</a>
@@ -455,19 +439,19 @@
       <div class="eyebrow">Debate Presentations &amp; Research Decks</div>
       <div class="hero-grid">
         <div>
-          <h1 class="hero-title">A small <em>editorial</em> library of argument, evidence, and design.</h1>
-          <p class="hero-sub">This hub collects the standalone pages already living in the repo and folds in the newly restored Kimi deployment as a preserved, self-contained presentation build. The goal is less “file dump,” more curated reading room.</p>
+          <h1 class="hero-title">Arguments, evidence, and <em>presentation</em>.</h1>
+          <p class="hero-sub">A curated collection of debate pages, political argument decks, and research-driven presentation work focused on persuasion, framing, and public-facing ideas.</p>
           <div class="meta-row">
-            <div class="meta-pill">Restored to workspace</div>
-            <div class="meta-pill">Kimi deployment v2 preserved</div>
-            <div class="meta-pill">Hub redesigned for editorial feel</div>
+            <div class="meta-pill">Debate</div>
+            <div class="meta-pill">Political Argument</div>
+            <div class="meta-pill">Research Presentation</div>
           </div>
         </div>
         <aside class="hero-aside">
-          <div class="aside-label">Editor’s Note</div>
-          <p class="aside-copy">The newest addition isn’t raw source — it’s a built app bundle. So instead of flattening it into a brittle single HTML file, it’s housed intact and linked like a featured edition.</p>
+          <div class="aside-label">Focus</div>
+          <p class="aside-copy">These pages are built around contested claims, ideological framing, historical evidence, and the presentation of arguments designed to be read, watched, or deployed in public-facing debate spaces.</p>
           <div class="button-row">
-            <a class="btn btn-primary" href="./kimi-agent-deployment-v2/">Open Kimi Build</a>
+            <a class="btn btn-primary" href="#featured">Start with Featured</a>
             <a class="btn btn-secondary" href="#archive">Browse Archive</a>
           </div>
         </aside>
@@ -478,12 +462,12 @@
   <main>
     <section class="section">
       <div class="wrap">
-        <div class="section-label">Curator’s Lead</div>
+        <div class="section-label">Overview</div>
         <div class="lead-grid">
-          <p class="lede">Not every presentation belongs in its own repo immediately. Sometimes the right first move is to preserve it, frame it well, and look at it in context. That’s what this page is for.</p>
+          <p class="lede">The project sits at the intersection of editorial design and argumentative structure: not just what a position says, but how it is staged, sequenced, sourced, and made legible to an audience.</p>
           <div class="note-card">
-            <h2>What changed</h2>
-            <p>The local repo was restored, the Kimi deployment folder was copied in intact, and the homepage was rebuilt to feel more like a magazine front page than a utility index.</p>
+            <h2>What’s here</h2>
+            <p>The collection spans policy questions, ideological disputes, historical claims, cultural criticism, and narrative framing — all housed as direct-access presentation pages.</p>
           </div>
         </div>
       </div>
@@ -491,19 +475,19 @@
 
     <section class="section" id="featured">
       <div class="wrap">
-        <div class="section-label">Featured Release</div>
+        <div class="section-label">Featured</div>
         <div class="feature">
           <article class="feature-main">
-            <div class="feature-kicker">Newly Added</div>
-            <h2>Kimi Agent Deployment v2</h2>
-            <p>Preserved as a self-contained deployment folder so the generated JavaScript and styles remain stable. That means you can review the actual experience first, then decide later whether it deserves its own separate repo and Pages deployment.</p>
+            <div class="feature-kicker">Presentation Build</div>
+            <h2>Championship Blueprint</h2>
+            <p>A polished presentation experience centered on structure, pacing, and visual sequencing. It sits slightly apart from the essay-like archive pages, functioning more as a designed deck than a straight textual brief.</p>
             <div class="button-row">
-              <a class="btn btn-primary" href="./kimi-agent-deployment-v2/">Launch Presentation</a>
+              <a class="btn btn-primary" href="./kimi-agent-deployment-v2/">Open Presentation</a>
             </div>
           </article>
           <aside class="feature-side">
-            <div class="aside-label">Why it’s handled this way</div>
-            <p>The Kimi output came in as a compiled build, not a lightweight standalone essay page like the others. Keeping it intact avoids breaking asset paths or losing the original look on first restore.</p>
+            <div class="aside-label">Editorial Lens</div>
+            <p>The featured work emphasizes presentation logic itself: movement through sections, visual rhythm, and the shaping of persuasion through layout as much as through argument.</p>
           </aside>
         </div>
       </div>
@@ -514,65 +498,65 @@
         <div class="section-label">Archive</div>
         <div class="decks-grid">
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Policy / Finance</div>
             <h3>Genius Act</h3>
-            <p>A standalone HTML presentation already living in the repo archive.</p>
+            <p>A presentation page oriented around policy argument and interpretive framing.</p>
             <a href="./genius-act-presentation.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Debate / Social Theory</div>
             <h3>Integration Net Positive</h3>
-            <p>Part of the existing collection of debate-oriented argument decks.</p>
+            <p>A structured case around social outcomes, tradeoffs, and evaluative claims.</p>
             <a href="./integration-net-positive.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">History / Political Power</div>
             <h3>COINTELPRO</h3>
-            <p>A research-style presentation page on the archive side of the hub.</p>
+            <p>A research-facing presentation focused on surveillance, disruption, and political control.</p>
             <a href="./new_cointelpro_presentation.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">History / Evidence Dispute</div>
             <h3>No Empirical Evidence</h3>
-            <p>Standalone HTML page with a more compact, argument-driven format.</p>
+            <p>A compact argument page built around evidentiary challenge and historical skepticism.</p>
             <a href="./no-empirical-evidence-precolumbian-africa-negative.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">History / Counterclaim</div>
             <h3>Precolumbus Evidence</h3>
-            <p>One of the previously committed essay-like debate pages in the repo.</p>
+            <p>A companion-style page that stages a competing historical argument.</p>
             <a href="./precolumbus-evidence-negative.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Region / Geopolitics</div>
             <h3>Sahel</h3>
-            <p>Included in the current archive set and linked here for direct access.</p>
+            <p>A presentation focused on regional instability, power, and interpretive framing.</p>
             <a href="./sahel_presentation.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Economics / Ideology</div>
             <h3>State Capitalism</h3>
-            <p>Another standalone deck preserved as a direct HTML reading experience.</p>
+            <p>An argument deck dealing with political economy and competing systemic labels.</p>
             <a href="./state-capitalism-affirmative.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Media / Influence</div>
             <h3>Who’s Paying Them?</h3>
-            <p>A heavier editorial-style piece and one of the stronger references for this hub’s tone.</p>
+            <p>An editorial-style investigation into influence, money, and ideological messaging.</p>
             <a href="./whos-paying-them.html">Open page</a>
           </article>
 
           <article class="deck">
-            <div class="deck-kicker">Presentation</div>
+            <div class="deck-kicker">Scandal / Narrative</div>
             <h3>WLFI Scandal</h3>
-            <p>The archive includes it here as a direct jump rather than burying it in filenames.</p>
+            <p>A scandal-focused presentation page with emphasis on sequence, claim, and fallout.</p>
             <a href="./wlfi_scandal_presentation.html">Open page</a>
           </article>
         </div>
@@ -582,8 +566,8 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-line">Present Debate / Restored &amp; Curated</div>
-      <p class="footer-copy">The current version keeps the Kimi deployment inside the hub so you can judge the presentation in context first. If it feels strong enough to stand alone, splitting it into its own repo later will be straightforward.</p>
+      <div class="footer-line">Present Debate / Archive of Argument</div>
+      <p class="footer-copy">A growing collection of presentation pages centered on public argument, political framing, historical dispute, and the design of persuasive research.</p>
     </div>
   </footer>
 </body>
